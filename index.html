@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chayxona.uz — лучшие чайханы Ташкента в одном месте</title>
+<meta name="description" content="Найдите и забронируйте стол в лучших чайханах Ташкента: район, суфа, место для намаза, детская зона, парковка — фильтруйте под себя.">
+
+<!--
+  SECURITY: Content-Security-Policy (демо-уровень, meta-тег).
+  Это единственный способ задать CSP в статическом HTML-файле без сервера.
+  Разрешаю только источники, которые реально используются на странице.
+  'unsafe-inline' для style-src и script-src — вынужденный компромисс:
+  вся страница — один файл без сборки, поэтому нет возможности сгенерировать
+  nonce/hash на каждый запрос. В реальном Next.js-деплое (продакшен PrimeAI)
+  CSP отдаётся HTTP-заголовком Content-Security-Policy на уровне middleware,
+  скрипты — это захэшированные Next.js-чанки, инлайновых <script>/<style>
+  с произвольным содержимым там нет вовсе, поэтому 'unsafe-inline' не нужен.
+  Там же добавляются заголовки, которых через meta-тег не поставить:
+  Strict-Transport-Security, X-Content-Type-Options: nosniff,
+  X-Frame-Options / frame-ancestors, Permissions-Policy.
+-->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://images.unsplash.com data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; frame-src https://www.openstreetmap.org; connect-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FAF6EF; --ivory:#FFFDF8; --sand:#E8DCC8; --beige:#D9C7A7;
+  --terracotta:#B2542E; --burgundy:#6E1E2B; --cocoa:#2B1D16;
+  --gold:#C59E42; --bronze:#8C6B3F; --silver:#B7B2A6;
+  --luxe:cubic-bezier(.22,1,.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--cocoa);font-family:'Manrope',sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+input,select,textarea{font-family:inherit}
+.container{max-width:1180px;margin:0 auto;padding:0 20px}
+section{padding:90px 0;scroll-margin-top:90px}
+h1,h2,h3,.display{font-family:'Cormorant Garamond',serif}
+[hidden]{display:none!important}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+
+/* ---------- шапка ---------- */
+.header{position:fixed;inset:0 0 auto;z-index:50;padding:18px 0;transition:all .5s var(--luxe);background:rgba(250,246,239,0)}
+.header.scrolled{padding:12px 0;background:rgba(250,246,239,.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(232,220,200,.5);box-shadow:0 10px 40px -12px rgba(43,29,22,.15)}
+.header-in{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;flex-direction:column;line-height:1.1}
+.logo{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:var(--cocoa)}
+.header:not(.scrolled) .logo{color:#fff}
+.logo span{color:var(--terracotta)}
+.header:not(.scrolled) .logo span{color:var(--gold)}
+.brand small{font-size:10px;letter-spacing:.06em;color:rgba(43,29,22,.55);font-weight:600}
+.header:not(.scrolled) .brand small{color:rgba(255,253,248,.65)}
+.hgroup{display:flex;align-items:center;gap:18px}
+.nav{display:none;align-items:center;gap:22px}
+.nav a{font-size:14px;font-weight:500;color:rgba(43,29,22,.8);transition:color .3s}
+.header:not(.scrolled) .nav a{color:rgba(255,253,248,.88)}
+.nav a:hover{color:var(--terracotta)!important}
+.nav a.active{color:var(--terracotta)!important;font-weight:700}
+.header:not(.scrolled) .nav a.active{color:var(--gold)!important}
+@media(min-width:900px){.nav{display:flex}}
+
+/* переключатель Для гостей / Для владельцев */
+.mode-toggle{display:inline-flex;padding:3px;border-radius:999px;background:rgba(43,29,22,.06);border:1px solid rgba(43,29,22,.1)}
+.header:not(.scrolled) .mode-toggle{background:rgba(255,253,248,.12);border-color:rgba(255,253,248,.28)}
+.mode-btn{padding:8px 14px;border-radius:999px;font-size:12.5px;font-weight:700;color:rgba(43,29,22,.6);transition:all .3s var(--luxe);white-space:nowrap}
+.header:not(.scrolled) .mode-btn{color:rgba(255,253,248,.8)}
+.mode-btn.on{background:var(--terracotta);color:var(--ivory);box-shadow:0 4px 14px -4px rgba(43,29,22,.35)}
+.header:not(.scrolled) .mode-btn.on{background:var(--gold);color:var(--cocoa)}
+
+.burger{width:42px;height:42px;border-radius:50%;border:1px solid rgba(43,29,22,.18);color:var(--cocoa);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.header:not(.scrolled) .burger{border-color:rgba(255,253,248,.35);color:#fff}
+@media(min-width:900px){.burger{display:none}}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;font-weight:600;font-size:14px;padding:11px 26px;transition:all .3s var(--luxe);white-space:nowrap}
+.btn-lg{padding:15px 34px;font-size:16px}
+.btn-sm{padding:8px 16px;font-size:12.5px}
+.btn-primary{background:var(--terracotta);color:var(--ivory);box-shadow:0 10px 40px -12px rgba(43,29,22,.3)}
+.btn-primary:hover{background:var(--burgundy);transform:translateY(-2px)}
+.btn-primary:disabled{opacity:.55;cursor:not-allowed;transform:none}
+.btn-gold{background:linear-gradient(100deg,var(--gold),#E3C878,var(--bronze));color:var(--cocoa)}
+.btn-gold:hover{filter:brightness(1.05);transform:translateY(-2px)}
+.btn-outline{border:1px solid rgba(255,253,248,.6);color:var(--ivory)}
+.btn-outline:hover{background:var(--ivory);color:var(--cocoa)}
+.btn-ghost{border:1px solid var(--sand);color:var(--cocoa)}
+.btn-ghost:hover{border-color:var(--terracotta);color:var(--terracotta)}
+.btn-danger-ghost{border:1px solid rgba(110,30,43,.35);color:var(--burgundy)}
+.btn-danger-ghost:hover{background:rgba(110,30,43,.08)}
+
+/* ---------- мобильное меню ---------- */
+.mmenu{position:fixed;inset:0;z-index:90;background:var(--cocoa);color:var(--cream);display:flex;flex-direction:column;opacity:0;pointer-events:none;transform:translateY(-24px);transition:all .4s var(--luxe)}
+.mmenu.open{opacity:1;pointer-events:auto;transform:none}
+.mmenu-top{display:flex;justify-content:space-between;align-items:center;padding:20px}
+.mmenu nav{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px}
+.mmenu nav a{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500}
+.mmenu nav a:hover{color:var(--gold)}
+.mmenu-x{width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,253,248,.3);color:var(--cream);display:flex;align-items:center;justify-content:center}
+.mmenu .mode-toggle{background:rgba(255,253,248,.1);border-color:rgba(255,253,248,.25)}
+.mmenu .mode-btn{color:rgba(255,253,248,.75)}
+.mmenu .mode-btn.on{background:var(--gold);color:var(--cocoa)}
+.mmenu p{padding-bottom:26px;text-align:center;font-size:13px;color:rgba(250,246,239,.55)}
+
+/* ---------- заголовки секций / reveal (переиспользуется везде) ---------- */
+.shead{max-width:640px;margin:0 auto 40px;text-align:center}
+.shead.left{margin:0 0 28px;text-align:left}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--bronze);margin-bottom:12px}
+.dark .eyebrow{color:var(--gold)}
+.shead h2{font-size:clamp(30px,4.5vw,46px);font-weight:600;line-height:1.15}
+.divider{width:112px;height:12px;margin:16px auto 0}
+.shead.left .divider{margin-left:0}
+.shead p.desc{margin-top:16px;color:rgba(43,29,22,.7);font-size:16px}
+.dark .shead p.desc{color:rgba(250,246,239,.7)}
+.reveal{opacity:0;transform:translateY(24px);transition:all .7s var(--luxe)}
+.reveal.on{opacity:1;transform:none}
+</style>
+<style>
+/* ---------- каталог: hero + поиск + доверие ---------- */
+.catalog-hero{position:relative;padding:150px 0 50px;overflow:hidden}
+.catalog-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(160deg,var(--cocoa),#3a281d 60%,var(--burgundy));z-index:-1}
+.catalog-hero .eyebrow{color:var(--gold)}
+.catalog-hero h1{font-size:clamp(34px,6vw,58px);font-weight:600;line-height:1.12;color:var(--cream);max-width:680px}
+.gold-grad{background:linear-gradient(100deg,var(--gold),#E8CF8A 45%,var(--bronze));-webkit-background-clip:text;background-clip:text;color:transparent}
+.catalog-hero p.sub{margin-top:16px;max-width:540px;color:rgba(250,246,239,.78);font-size:16px}
+.search-bar{margin-top:30px;max-width:560px;display:flex;gap:10px;background:rgba(255,253,248,.08);border:1px solid rgba(255,253,248,.22);backdrop-filter:blur(8px);border-radius:999px;padding:6px 6px 6px 20px}
+.search-bar svg{flex-shrink:0;align-self:center;width:18px;height:18px;stroke:rgba(250,246,239,.6)}
+.search-bar input{flex:1;background:transparent;border:0;color:var(--cream);font-size:14px;outline:none}
+.search-bar input::placeholder{color:rgba(250,246,239,.45)}
+.search-bar button{flex-shrink:0;background:var(--gold);color:var(--cocoa);border-radius:999px;padding:10px 20px;font-size:13px;font-weight:700}
+.trust-strip{margin-top:34px;display:flex;flex-wrap:wrap;gap:10px}
+.trust-chip{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:rgba(250,246,239,.8);border:1px solid rgba(255,253,248,.2);border-radius:999px;padding:7px 14px}
+.trust-chip svg{width:14px;height:14px;stroke:var(--gold)}
+
+/* ---------- фильтры ---------- */
+.filters-wrap{background:var(--ivory);border-bottom:1px solid var(--sand);position:relative;z-index:2}
+.filters{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:18px 0}
+.f-select{border:1px solid var(--sand);background:var(--cream);border-radius:12px;padding:9px 14px;font-size:13.5px;color:var(--cocoa)}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--sand);background:var(--cream);color:rgba(43,29,22,.72);border-radius:999px;padding:9px 16px;font-size:13.5px;font-weight:500;transition:all .3s var(--luxe)}
+.chip svg{width:15px;height:15px}
+.chip:hover{border-color:rgba(178,84,46,.5);color:var(--cocoa)}
+.chip.on{border-color:var(--terracotta);background:var(--terracotta);color:var(--ivory);box-shadow:0 4px 18px -6px rgba(43,29,22,.25)}
+.chip-reset{margin-left:auto;font-size:13px;font-weight:700;color:var(--burgundy)}
+.chip-reset:hover{text-decoration:underline}
+.results-bar{padding:16px 0 4px;font-size:13.5px;color:rgba(43,29,22,.55)}
+.results-bar b{color:var(--cocoa)}
+
+/* ---------- сетка карточек чайхан ---------- */
+.card-grid{display:grid;gap:26px;padding:34px 0 90px}
+@media(min-width:640px){.card-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1024px){.card-grid{grid-template-columns:1fr 1fr 1fr}}
+.rcard{display:flex;flex-direction:column;background:var(--ivory);border-radius:26px;overflow:hidden;box-shadow:0 4px 24px -8px rgba(43,29,22,.12);transition:all .5s var(--luxe)}
+.rcard:hover{transform:translateY(-6px);box-shadow:0 14px 40px -12px rgba(43,29,22,.22)}
+.rcard-img{position:relative;aspect-ratio:4/3;overflow:hidden}
+.rcard-img img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--luxe)}
+.rcard:hover .rcard-img img{transform:scale(1.07)}
+.rcard-price{position:absolute;top:12px;right:12px;background:rgba(43,29,22,.75);backdrop-filter:blur(4px);color:var(--cream);font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px}
+.rcard-district{position:absolute;top:12px;left:12px;background:rgba(255,253,248,.9);color:var(--cocoa);font-size:11.5px;font-weight:700;padding:6px 12px;border-radius:999px}
+.rcard-body{padding:20px 20px 22px;display:flex;flex-direction:column;gap:10px;flex:1}
+.rcard-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.rcard-top h3{font-size:21px;font-weight:600}
+.rrating{display:flex;align-items:center;gap:4px;font-size:12.5px;color:var(--bronze);flex-shrink:0;font-weight:700}
+.rrating svg{width:13px;height:13px}
+.rcard-tag{font-size:13px;color:rgba(43,29,22,.6);flex:1}
+.rbadges{display:flex;flex-wrap:wrap;gap:6px}
+.ibadge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;color:var(--bronze);background:rgba(197,158,66,.12);border-radius:999px;padding:4px 9px}
+.ibadge svg{width:12px;height:12px}
+.rcard-foot{margin-top:auto;display:flex;gap:10px;padding-top:6px}
+.rcard-foot .btn{flex:1}
+.empty-state{padding:60px 20px;text-align:center;color:rgba(43,29,22,.55)}
+.empty-state svg{width:40px;height:40px;stroke:var(--sand);margin:0 auto 14px}
+
+/* блок "о проекте" на главной, для якоря нав-ссылки */
+.about-platform{background:var(--ivory)}
+.ap-grid{display:grid;gap:22px}
+@media(min-width:768px){.ap-grid{grid-template-columns:repeat(3,1fr)}}
+.ap-card{background:var(--cream);border-radius:20px;padding:26px;border:1px solid var(--sand)}
+.ap-card svg{width:26px;height:26px;stroke:var(--terracotta);margin-bottom:12px}
+.ap-card h3{font-size:19px;font-weight:600}
+.ap-card p{margin-top:6px;font-size:14px;color:rgba(43,29,22,.65)}
+</style>
+<style>
+/* ---------- страница чайханы: подшапка навигации ---------- */
+.subnav{background:var(--ivory);border-bottom:1px solid var(--sand);padding:14px 0}
+.subnav-in{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:700;color:var(--terracotta)}
+.back-link:hover{text-decoration:underline}
+.back-link svg{width:15px;height:15px}
+.subnav-links{display:flex;gap:18px;flex-wrap:wrap;margin-left:auto}
+.subnav-links a{font-size:13.5px;font-weight:500;color:rgba(43,29,22,.65)}
+.subnav-links a:hover{color:var(--terracotta)}
+
+/* ---------- hero карточки чайханы ---------- */
+.rhero{position:relative;min-height:72vh;display:flex;align-items:flex-end;overflow:hidden}
+.rhero-bg{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.06)}
+.rhero-ov{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(43,29,22,.35),rgba(43,29,22,.55) 60%,rgba(43,29,22,.92))}
+.rhero .container{position:relative;padding-bottom:52px;padding-top:70px}
+.rhero-eyebrow{font-size:12px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.rhero h1{font-size:clamp(32px,6vw,54px);font-weight:600;line-height:1.1;color:var(--cream);max-width:680px}
+.rhero p.sub{margin-top:14px;max-width:560px;color:rgba(250,246,239,.8);font-size:16px}
+.rhero-btns{margin-top:26px;display:flex;flex-wrap:wrap;gap:12px}
+.rhero-badges{margin-top:34px;display:flex;flex-wrap:wrap;gap:10px;list-style:none}
+.badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,253,248,.25);background:rgba(43,29,22,.3);backdrop-filter:blur(10px);border-radius:999px;padding:9px 16px;font-size:13.5px;color:var(--cream)}
+.badge svg{width:15px;height:15px;stroke:var(--gold)}
+
+/* ---------- о заведении ---------- */
+.about-grid{display:grid;gap:40px;align-items:center}
+@media(min-width:1024px){.about-grid{grid-template-columns:1fr 1fr;gap:64px}}
+.about-img{position:relative;aspect-ratio:4/5;border-radius:140px 140px 24px 24px;overflow:hidden;box-shadow:0 10px 40px -12px rgba(43,29,22,.18)}
+.about-img img{width:100%;height:100%;object-fit:cover}
+.about p.t{margin-bottom:16px;color:rgba(43,29,22,.75)}
+.stats{margin-top:30px;display:grid;grid-template-columns:1fr 1fr;gap:24px 20px;border-top:1px solid var(--sand);padding-top:26px}
+.stat b{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:600;color:var(--terracotta);line-height:1}
+.stat span{display:block;margin-top:4px;font-size:13.5px;color:var(--bronze)}
+
+/* ---------- интерьер ---------- */
+.bg-ivory{background:var(--ivory)}
+.int-grid{display:grid;gap:20px}
+@media(min-width:640px){.int-grid{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}}
+.int-card{position:relative;aspect-ratio:4/3;border-radius:22px;overflow:hidden;box-shadow:0 4px 24px -8px rgba(43,29,22,.12)}
+.int-card img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--luxe)}
+.int-card:hover img{transform:scale(1.08)}
+.int-card::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(43,29,22,.85),rgba(43,29,22,.2) 55%,transparent)}
+.int-txt{position:absolute;inset:auto 0 0;padding:22px;z-index:1}
+.int-txt h3{font-size:22px;font-weight:600;color:var(--cream)}
+.int-txt p{margin-top:5px;font-size:13.5px;color:rgba(250,246,239,.75)}
+
+/* ---------- меню ---------- */
+.tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin-bottom:32px}
+.tab{border:1px solid var(--sand);background:var(--ivory);color:rgba(43,29,22,.7);border-radius:999px;padding:9px 18px;font-size:13.5px;font-weight:500;transition:all .3s var(--luxe)}
+.tab:hover{border-color:rgba(178,84,46,.5);color:var(--cocoa)}
+.tab.on{border-color:var(--terracotta);background:var(--terracotta);color:var(--ivory)}
+.menu-grid{display:grid;gap:20px}
+@media(min-width:640px){.menu-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1024px){.menu-grid{grid-template-columns:1fr 1fr 1fr}}
+.dish{background:var(--ivory);border-radius:22px;overflow:hidden;box-shadow:0 4px 24px -8px rgba(43,29,22,.12);transition:all .5s var(--luxe)}
+.dish:hover{transform:translateY(-5px)}
+.dish-img{aspect-ratio:4/3;overflow:hidden}
+.dish-img img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--luxe)}
+.dish:hover .dish-img img{transform:scale(1.07)}
+.dish-b{padding:18px 20px}
+.dish-t{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.dish-t h3{font-size:20px;font-weight:600}
+.dish-t b{flex-shrink:0;font-size:13.5px;color:var(--terracotta)}
+.dish-b p{margin-top:6px;font-size:13.5px;color:rgba(43,29,22,.65)}
+.fade-in{animation:fadeUp .35s var(--luxe)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ---------- удобства ---------- */
+.dark{background:var(--cocoa);color:var(--cream)}
+.fac-grid{display:grid;gap:16px}
+@media(min-width:640px){.fac-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1024px){.fac-grid{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}}
+.fac{border:1px solid rgba(255,253,248,.1);background:rgba(255,253,248,.05);border-radius:16px;padding:20px;transition:all .5s var(--luxe);height:100%}
+.fac:hover{transform:translateY(-4px);border-color:rgba(197,158,66,.4);background:rgba(255,253,248,.1)}
+.fac-ic{width:42px;height:42px;border-radius:12px;background:rgba(197,158,66,.15);color:var(--gold);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.fac h3{font-size:18px;font-weight:600}
+.fac p{margin-top:4px;font-size:12.5px;color:rgba(250,246,239,.6)}
+
+/* ---------- галерея + lightbox ---------- */
+.gal{columns:2;gap:14px}
+@media(min-width:1024px){.gal{columns:3}}
+.gal button{display:block;width:100%;margin-bottom:14px;border-radius:16px;overflow:hidden;position:relative;box-shadow:0 4px 24px -8px rgba(43,29,22,.12)}
+.gal img{width:100%;transition:transform .7s var(--luxe)}
+.gal button:hover img{transform:scale(1.06)}
+.lb{position:fixed;inset:0;z-index:100;background:rgba(43,29,22,.95);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:20px}
+.lb.open{display:flex}
+.lb img{max-width:min(1000px,92vw);max-height:80vh;object-fit:contain}
+.lb figcaption{position:absolute;bottom:26px;left:0;right:0;text-align:center;font-size:14px;color:rgba(250,246,239,.7)}
+.lb-x,.lb-p,.lb-n{position:absolute;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,253,248,.3);color:var(--cream);display:flex;align-items:center;justify-content:center}
+.lb-x:hover,.lb-p:hover,.lb-n:hover{background:rgba(255,253,248,.1)}
+.lb-x{top:20px;right:20px}
+.lb-p{left:16px;top:50%;transform:translateY(-50%)}
+.lb-n{right:16px;top:50%;transform:translateY(-50%)}
+@media(max-width:640px){.lb-p,.lb-n{display:none}}
+
+/* ---------- отзывы ---------- */
+.rev-wrap{max-width:740px;margin:0 auto}
+.rev-card{background:var(--ivory);border-radius:22px;padding:32px;box-shadow:0 4px 24px -8px rgba(43,29,22,.12);animation:fadeUp .45s var(--luxe)}
+.rev-top{display:flex;align-items:center;gap:14px}
+.avatar-i{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px;color:var(--ivory);flex-shrink:0;border:2px solid rgba(197,158,66,.4)}
+.rev-top b{font-size:15.5px}
+.rev-meta{display:flex;align-items:center;gap:9px;margin-top:3px}
+.stars{display:flex;gap:2px}
+.stars svg{width:15px;height:15px}
+.rev-date{font-size:12px;color:rgba(43,29,22,.5)}
+.rev-card blockquote{margin-top:18px;color:rgba(43,29,22,.8);font-size:14.5px}
+.rev-nav{margin-top:26px;display:flex;align-items:center;justify-content:center;gap:20px}
+.rev-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--sand);color:var(--cocoa);display:flex;align-items:center;justify-content:center}
+.rev-btn:hover{border-color:var(--terracotta);color:var(--terracotta)}
+.dots{display:flex;gap:7px}
+.dot{width:8px;height:8px;border-radius:99px;background:var(--sand);transition:all .3s}
+.dot.on{width:26px;background:var(--terracotta)}
+
+/* ---------- CTA ---------- */
+.cta{position:relative;overflow:hidden;padding:90px 0;text-align:center}
+.cta-bg{position:absolute;inset:0;background-size:cover;background-position:center}
+.cta-ov{position:absolute;inset:0;background:linear-gradient(to right,rgba(110,30,43,.9),rgba(43,29,22,.85),rgba(43,29,22,.9))}
+.cta .container{position:relative}
+.cta h2{font-size:clamp(30px,5vw,50px);font-weight:600;line-height:1.15;color:var(--cream);max-width:680px;margin:18px auto 0}
+.cta p{margin:16px auto 0;max-width:520px;color:rgba(250,246,239,.75);font-size:16px}
+.cta .btn{margin-top:28px}
+</style>
+<style>
+/* ---------- бронь ---------- */
+.book-grid{display:grid;gap:40px}
+@media(min-width:1024px){.book-grid{grid-template-columns:1fr 1.2fr;gap:64px}}
+.book-info li{display:flex;align-items:center;gap:12px;margin-bottom:14px;font-size:14px;color:rgba(43,29,22,.75);list-style:none}
+.book-info svg{width:19px;height:19px;stroke:var(--terracotta);flex-shrink:0}
+.form{background:var(--cream);border-radius:22px;padding:28px;box-shadow:0 10px 40px -12px rgba(43,29,22,.18)}
+.fgrid{display:grid;gap:16px}
+@media(min-width:640px){.fgrid{grid-template-columns:1fr 1fr}.fspan{grid-column:1/-1}}
+.field label{display:block;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--bronze);margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;border:1px solid var(--sand);background:var(--ivory);border-radius:14px;padding:12px 15px;font-size:14px;color:var(--cocoa);transition:border .2s;outline:none}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--terracotta)}
+.field textarea{min-height:86px;resize:vertical}
+.field .err{display:none;margin-top:5px;font-size:12px;font-weight:500;color:var(--burgundy)}
+.field.bad input,.field.bad select,.field.bad textarea{border-color:var(--burgundy)}
+.field.bad .err{display:block}
+.form .btn{width:100%;margin-top:20px}
+.form-note{margin-top:12px;text-align:center;font-size:11.5px;color:rgba(43,29,22,.5);line-height:1.5}
+.success{display:none;background:var(--cocoa);color:var(--cream);border-radius:22px;padding:44px 30px;text-align:center;min-height:380px;flex-direction:column;align-items:center;justify-content:center}
+.success.show{display:flex;animation:fadeUp .4s var(--luxe)}
+.succ-ic{width:60px;height:60px;border-radius:50%;background:rgba(197,158,66,.15);color:var(--gold);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.success h3{font-size:27px;font-weight:600}
+.success p{margin-top:8px;max-width:360px;color:rgba(250,246,239,.7);font-size:14px}
+.success button{margin-top:20px;font-size:13.5px;font-weight:600;color:var(--gold)}
+.success button:hover{text-decoration:underline}
+.spin{width:17px;height:17px;border:2.5px solid rgba(255,253,248,.35);border-top-color:var(--ivory);border-radius:50%;animation:sp 1s linear infinite;flex-shrink:0}
+@keyframes sp{to{transform:rotate(360deg)}}
+.rl-banner{display:none;align-items:center;gap:10px;background:rgba(110,30,43,.08);border:1px solid rgba(110,30,43,.25);color:var(--burgundy);border-radius:14px;padding:12px 15px;font-size:13px;font-weight:500;margin-bottom:16px}
+.rl-banner.show{display:flex}
+.rl-banner svg{width:18px;height:18px;flex-shrink:0}
+
+/* ---------- контакты ---------- */
+.cont-grid{display:grid;gap:26px}
+@media(min-width:1024px){.cont-grid{grid-template-columns:1fr 1fr}}
+.cont-list{list-style:none}
+.cont-list li{display:flex;gap:14px;margin-bottom:18px}
+.cont-ic{width:42px;height:42px;border-radius:12px;background:rgba(178,84,46,.1);color:var(--terracotta);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cont-list small{display:block;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--bronze)}
+.cont-list a,.cont-list p{margin-top:3px;font-weight:500;display:block}
+.cont-list a:hover{color:var(--terracotta)}
+.soc{display:flex;flex-wrap:wrap;gap:10px;border-top:1px solid var(--sand);padding-top:20px}
+.soc a{border:1px solid var(--sand);border-radius:999px;padding:8px 18px;font-size:13.5px;font-weight:500}
+.soc a:hover{border-color:var(--terracotta);color:var(--terracotta)}
+.map{border-radius:22px;overflow:hidden;box-shadow:0 4px 24px -8px rgba(43,29,22,.12);min-height:340px}
+.map iframe{width:100%;height:100%;min-height:340px;border:0}
+
+/* ---------- footer ---------- */
+.footer{background:var(--cocoa);color:var(--cream);padding:56px 0 32px}
+.foot-grid{display:grid;gap:36px}
+@media(min-width:768px){.foot-grid{grid-template-columns:repeat(3,1fr)}}
+.footer .logo{color:var(--cream);font-size:27px}
+.foot-tag{margin-top:14px;max-width:280px;font-size:13.5px;color:rgba(250,246,239,.6)}
+.foot-h{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.foot-nav{display:grid;grid-template-columns:1fr 1fr;gap:9px;list-style:none}
+.foot-nav a,.foot-c a,.foot-c li{font-size:13.5px;color:rgba(250,246,239,.7)}
+.foot-nav a:hover,.foot-c a:hover{color:var(--gold)}
+.foot-c{list-style:none}
+.foot-c li{margin-bottom:9px}
+.foot-security{margin-top:16px;display:flex;align-items:flex-start;gap:8px;font-size:12px;color:rgba(250,246,239,.55);max-width:300px}
+.foot-security svg{width:15px;height:15px;flex-shrink:0;margin-top:1px;stroke:var(--gold)}
+.foot-bot{margin-top:44px;border-top:1px solid rgba(255,253,248,.1);padding-top:20px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:11.5px;color:rgba(250,246,239,.4)}
+
+/* ---------- владелец: вход ---------- */
+.owner-wrap{min-height:70vh;display:flex;align-items:center;padding:150px 0 70px}
+.owner-login{max-width:420px;margin:0 auto;background:var(--ivory);border-radius:24px;padding:36px 30px;box-shadow:0 10px 40px -12px rgba(43,29,22,.18);text-align:center}
+.owner-login .ic{width:52px;height:52px;border-radius:50%;background:rgba(178,84,46,.1);color:var(--terracotta);display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.owner-login h2{font-size:26px;font-weight:600}
+.owner-login p{margin-top:8px;font-size:13.5px;color:rgba(43,29,22,.6)}
+.owner-login form{margin-top:24px;text-align:left;display:flex;flex-direction:column;gap:14px}
+.demo-note{margin-top:14px;font-size:11.5px;color:rgba(43,29,22,.45);line-height:1.5}
+
+/* ---------- владелец: дашборд ---------- */
+.dash-wrap{padding:150px 0 80px}
+.dash-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-bottom:30px}
+.dash-top h2{font-size:28px;font-weight:600}
+.dash-top p{font-size:13.5px;color:rgba(43,29,22,.55);margin-top:2px}
+.stat-row{display:grid;gap:16px;margin-bottom:36px}
+@media(min-width:640px){.stat-row{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.stat-row{grid-template-columns:repeat(4,1fr)}}
+.stat-card{background:var(--ivory);border-radius:18px;padding:20px 22px;box-shadow:0 4px 24px -8px rgba(43,29,22,.1)}
+.stat-card b{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600;color:var(--terracotta);line-height:1;display:block}
+.stat-card span{display:block;margin-top:6px;font-size:12.5px;color:rgba(43,29,22,.55)}
+.dash-panel{background:var(--ivory);border-radius:22px;padding:26px;box-shadow:0 4px 24px -8px rgba(43,29,22,.1);margin-bottom:26px}
+.dash-panel-h{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.dash-panel-h h3{font-size:20px;font-weight:600}
+.rls-note{display:flex;gap:8px;align-items:flex-start;font-size:12px;color:rgba(43,29,22,.5);background:rgba(197,158,66,.1);border-radius:12px;padding:10px 14px;margin-bottom:18px}
+.rls-note svg{width:14px;height:14px;flex-shrink:0;margin-top:2px;stroke:var(--bronze)}
+
+.brow{display:grid;grid-template-columns:1.3fr 1fr .7fr 1fr auto;gap:14px;align-items:center;padding:14px 10px;border-bottom:1px solid var(--sand);font-size:13.5px}
+.brow:last-child{border-bottom:0}
+.brow.head{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--bronze);padding-bottom:10px}
+.brow .bname{font-weight:600}
+.brow .bphone{display:flex;align-items:center;gap:8px;color:rgba(43,29,22,.65)}
+.reveal-phone{font-size:11px;font-weight:700;color:var(--terracotta)}
+.reveal-phone:hover{text-decoration:underline}
+.status-pill{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;border-radius:999px;padding:5px 11px;white-space:nowrap}
+.status-new{background:rgba(197,158,66,.18);color:var(--bronze)}
+.status-confirmed{background:rgba(178,84,46,.14);color:var(--terracotta)}
+.status-completed{background:rgba(43,29,22,.08);color:rgba(43,29,22,.6)}
+.status-cancelled{background:rgba(110,30,43,.1);color:var(--burgundy)}
+.brow-actions{display:flex;gap:6px;justify-content:flex-end}
+.icon-btn{width:32px;height:32px;border-radius:9px;border:1px solid var(--sand);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.icon-btn svg{width:14px;height:14px}
+.icon-btn.ok:hover{border-color:var(--terracotta);color:var(--terracotta)}
+.icon-btn.no:hover{border-color:var(--burgundy);color:var(--burgundy)}
+@media(max-width:820px){
+  .brow.head{display:none}
+  .brow{grid-template-columns:1fr;gap:6px;padding:16px 4px;position:relative}
+  .brow .status-pill{position:absolute;top:16px;right:4px}
+  .brow-actions{justify-content:flex-start;margin-top:6px}
+}
+
+.loyalty-grid{display:grid;gap:16px}
+@media(min-width:640px){.loyalty-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.loyalty-grid{grid-template-columns:repeat(3,1fr)}}
+.loyalty-card{position:relative;border-radius:18px;padding:18px 20px;background:var(--cream);border:1px solid var(--sand);overflow:hidden}
+.loyalty-card::before{content:'';position:absolute;top:0;left:0;width:5px;height:100%}
+.tier-Золото::before{background:var(--gold)}
+.tier-Серебро::before{background:var(--silver)}
+.tier-Бронза::before{background:var(--bronze)}
+.loyalty-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.loyalty-top b{font-size:15px}
+.tier-tag{font-size:10.5px;font-weight:800;letter-spacing:.04em;padding:3px 9px;border-radius:999px;color:var(--ivory)}
+.tier-Золото .tier-tag{background:var(--gold);color:var(--cocoa)}
+.tier-Серебро .tier-tag{background:var(--silver);color:var(--cocoa)}
+.tier-Бронза .tier-tag{background:var(--bronze)}
+.loyalty-card p{margin-top:8px;font-size:12.5px;color:rgba(43,29,22,.6)}
+.loyalty-bar{margin-top:10px;height:6px;border-radius:99px;background:var(--sand);overflow:hidden}
+.loyalty-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--terracotta),var(--gold));border-radius:99px}
+@media(max-width:900px){.dash-top{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+
+<header class="header" id="hdr">
+  <div class="container header-in">
+    <a href="#/catalog" class="brand" onclick="return true">
+      <span class="logo">Chayxona<span>.uz</span></span>
+      <small>ЛУЧШИЕ ЧАЙХАНЫ ТАШКЕНТА</small>
+    </a>
+    <div class="hgroup">
+      <nav class="nav" id="navLinks" aria-label="Основная навигация">
+        <a href="#/catalog" data-nav="catalog">Каталог</a>
+        <a href="#about-platform" data-nav="about">О проекте</a>
+        <a href="#platform-contacts" data-nav="contacts">Контакты</a>
+      </nav>
+      <div class="mode-toggle" role="group" aria-label="Режим просмотра">
+        <button class="mode-btn" id="modeGuestBtn" onclick="location.hash='#/catalog'">Для гостей</button>
+        <button class="mode-btn" id="modeOwnerBtn" onclick="location.hash='#/owner'">Для владельцев</button>
+      </div>
+      <button class="burger" aria-label="Открыть меню" onclick="mm(true)">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mmenu" id="mmenu">
+  <div class="mmenu-top">
+    <span class="logo" style="color:var(--cream)">Chayxona<span style="color:var(--gold)">.uz</span></span>
+    <button class="mmenu-x" aria-label="Закрыть" onclick="mm(false)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <nav>
+    <a href="#/catalog" onclick="mm(false)">Каталог</a>
+    <a href="#about-platform" onclick="mm(false)">О проекте</a>
+    <a href="#platform-contacts" onclick="mm(false)">Контакты</a>
+    <div class="mode-toggle" style="margin-top:8px">
+      <button class="mode-btn" id="modeGuestBtnM" onclick="mm(false);location.hash='#/catalog'">Для гостей</button>
+      <button class="mode-btn" id="modeOwnerBtnM" onclick="mm(false);location.hash='#/owner'">Для владельцев</button>
+    </div>
+  </nav>
+  <p>Chayxona.uz · агрегатор чайхан Ташкента</p>
+</div>
+
+<main>
+
+<!-- ======================= ЭКРАН 1: КАТАЛОГ ======================= -->
+<div id="view-catalog">
+  <section class="catalog-hero" style="padding-bottom:0">
+    <div class="container">
+      <p class="eyebrow reveal">Chayxona.uz</p>
+      <h1 class="reveal">Лучшие чайханы Ташкента <span class="gold-grad">в одном месте</span></h1>
+      <p class="sub reveal">Находите подходящую чайхану по району и атмосфере, бронируйте стол за минуту — без звонков и ожидания.</p>
+      <form class="search-bar reveal" id="searchForm" onsubmit="return false">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input id="searchInput" type="text" placeholder="Название чайханы, например «Шарк»" maxlength="60" autocomplete="off">
+        <button type="button" onclick="document.getElementById('searchInput').focus()">Найти</button>
+      </form>
+      <ul class="trust-strip reveal">
+        <li class="trust-chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 3l2.7 5.6 6.1.8-4.5 4.2 1.1 6-5.4-2.9-5.4 2.9 1.1-6L3.2 9.4l6.1-.8z"/></svg>10 проверенных чайхан</li>
+        <li class="trust-chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Бронь за 1 минуту</li>
+        <li class="trust-chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg>Данные защищены</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="filters-wrap">
+    <div class="container">
+      <div class="filters" id="filtersBar">
+        <select class="f-select" id="fDistrict" aria-label="Район"></select>
+        <select class="f-select" id="fPrice" aria-label="Средний чек">
+          <option value="">Любой чек</option>
+          <option value="1">До 60 000 сум</option>
+          <option value="2">60 000 – 110 000</option>
+          <option value="3">От 110 000</option>
+        </select>
+        <button class="chip" data-flt="sufa" onclick="toggleChip(this,'sufa')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 18v-5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5M4 18h16M6 11V8a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3"/></svg>
+          Суфа
+        </button>
+        <button class="chip" data-flt="namaz" onclick="toggleChip(this,'namaz')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 21V12a6 6 0 0 1 12 0v9M4 21h16"/></svg>
+          Место для намаза
+        </button>
+        <button class="chip" data-flt="kids" onclick="toggleChip(this,'kids')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3"/><path d="M6 21c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg>
+          Детская зона
+        </button>
+        <button class="chip" data-flt="parking" onclick="toggleChip(this,'parking')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 16V8h4a2.5 2.5 0 0 1 0 5H9"/></svg>
+          Парковка
+        </button>
+        <button class="chip-reset" onclick="resetFilters()">Сбросить</button>
+      </div>
+      <p class="results-bar" id="resultsBar"></p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card-grid" id="catalogGrid"></div>
+  </div>
+
+  <section class="about-platform" id="about-platform">
+    <div class="container">
+      <div class="shead reveal">
+        <p class="eyebrow">О проекте</p>
+        <h2>Как работает Chayxona.uz</h2>
+        <svg class="divider" viewBox="0 0 120 12" fill="none" stroke="#B2542E" stroke-width="1.2"><path d="M0 6h38" opacity=".5"/><path d="M82 6h38" opacity=".5"/><path d="M52 6l8-5 8 5-8 5z"/><circle cx="60" cy="6" r="1.6" fill="#B2542E" stroke="none"/></svg>
+      </div>
+      <div class="ap-grid">
+        <div class="ap-card reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <h3>1. Находите</h3>
+          <p>Фильтруйте чайханы по району, атмосфере и среднему чеку — без хаотичного гугления.</p>
+        </div>
+        <div class="ap-card reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="4" y="5" width="16" height="16" rx="2.5"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>
+          <h3>2. Бронируете</h3>
+          <p>Заявка приходит владельцу мгновенно — в личный кабинет и в Telegram.</p>
+        </div>
+        <div class="ap-card reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg>
+          <h3>3. Приходите спокойно</h3>
+          <p>Ваши данные передаются только выбранной чайхане и нигде не публикуются.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ======================= ЭКРАН 2: СТРАНИЦА ЧАЙХАНЫ ======================= -->
+<div id="view-detail" hidden>
+  <div id="detailRoot"></div>
+</div>
+
+<!-- ======================= ЭКРАН 3: КАБИНЕТ ВЛАДЕЛЬЦА ======================= -->
+<div id="view-owner" hidden>
+  <div id="ownerRoot"></div>
+</div>
+
+</main>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true">
+  <figure><img id="lbImg" src="" alt=""><figcaption id="lbCap"></figcaption></figure>
+  <button class="lb-x" aria-label="Закрыть" onclick="lbClose()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <button class="lb-p" aria-label="Назад" onclick="lbNav(-1)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <button class="lb-n" aria-label="Вперёд" onclick="lbNav(1)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></button>
+</div>
+
+<footer class="footer" id="platform-contacts">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <p class="logo">Chayxona<span style="color:var(--gold)">.uz</span></p>
+        <p class="foot-tag">Лучшие чайханы Ташкента в одном месте. Находите, бронируйте, возвращайтесь.</p>
+        <div class="foot-security">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg>
+          <span>Данные бронирования передаются только чайхане, которую вы выбрали, и никогда не публикуются и не продаются третьим лицам.</span>
+        </div>
+      </div>
+      <nav aria-label="Навигация в подвале">
+        <p class="foot-h">Разделы</p>
+        <ul class="foot-nav">
+          <li><a href="#/catalog">Каталог</a></li>
+          <li><a href="#about-platform">О проекте</a></li>
+          <li><a href="#/owner">Для владельцев</a></li>
+          <li><a href="#platform-contacts">Контакты</a></li>
+        </ul>
+      </nav>
+      <div>
+        <p class="foot-h">Контакты</p>
+        <ul class="foot-c">
+          <li><a href="tel:+998712000000">+998 71 200-00-00</a></li>
+          <li><a href="mailto:info@chayxona.uz">info@chayxona.uz</a></li>
+          <li>г. Ташкент</li>
+        </ul>
+        <div class="soc" style="margin-top:14px">
+          <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://t.me" target="_blank" rel="noopener">Telegram</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bot"><p>© 2026 Chayxona.uz. Демо-версия платформы.</p><p>Сделано PrimeAI</p></div>
+  </div>
+</footer>
+
+<script>
+'use strict';
+/* ============================================================================
+   SECURITY LAYER — демо-реализация в статическом HTML.
+   Всё, что ниже, работает по-настоящему (не заглушки), но это защита уровня
+   "витрины". Рядом с каждым блоком — как это делается по-настоящему в
+   реальном продукте (Next.js 15 + Supabase, наш стек в chayxona-saas).
+   ============================================================================ */
+
+/* ---------- 1. Экранирование вывода (защита от XSS) ----------
+   Правило: ЛЮБОЙ текст, который попадает в innerHTML, должен пройти через e().
+   Это касается не только формы брони, но и данных самих чайхан (название,
+   описание, отзывы) — потому что в реальном продукте эти поля тоже вводят
+   люди через свои формы (владелец через кабинет, гость — через форму отзыва),
+   а значит с точки зрения браузера это ровно такой же "недоверенный" ввод,
+   как имя в форме бронирования. Экранировать только "форму" и не экранировать
+   "свои данные" — типичная ошибка, которая открывает XSS через профиль
+   заведения или отзыв.
+   В реальном стеке (React/Next.js) это происходит автоматически: React
+   экранирует любое значение, вставленное как {value} в JSX, если только
+   разработчик сознательно не использует dangerouslySetInnerHTML. Для полей,
+   где реально нужен богатый текст (форматирование в описании), в реальном
+   проекте перед рендером дополнительно прогоняют текст через библиотеку
+   санитайзер (например DOMPurify) с явным white-list тегов. */
+function e(str){
+  return String(str ?? '').replace(/[&<>"']/g, ch => ({
+    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+  }[ch]));
+}
+
+/* ---------- 2. Санитизация входа (отдельно от экранирования!) ----------
+   Санитизация ≠ экранирование. Санитизация — это чистка ДО того, как значение
+   куда-то попадёт (убираем невидимые управляющие символы, обрезаем пробелы,
+   ограничиваем длину). Экранирование (e()) — это защита ПРИ выводе. Нужны оба:
+   санитизация — гигиена данных и защита от переполнения/мусора в БД,
+   экранирование — единственное, что реально не даёт исполниться чужому HTML.
+   Если полагаться только на "очистку при вводе" и забыть про экранирование
+   при выводе — это главная причина XSS-уязвимостей на практике. */
+function sanitizeInput(str, maxLen){
+  let s = String(str ?? '');
+  s = s.replace(/[\u0000-\u001F\u007F]/g, ''); // управляющие символы
+  s = s.trim();
+  if (maxLen) s = s.slice(0, maxLen);
+  return s;
+}
+
+/* ---------- 3. Валидация: клиент + имитация сервера ----------
+   validateBooking — ЕДИНАЯ функция правил. Вызывается дважды:
+   сразу на клиенте (мгновенная подсказка гостю) и ещё раз "на сервере"
+   (см. simulateServerRequest ниже) — потому что клиентскую проверку легко
+   обойти через DevTools или прямой запрос curl/Postman в обход формы.
+   В реальном проекте это ровно та же ситуация: наша Zod-схема в
+   lib/validation.ts используется в Server Action на сервере как
+   единственный источник истины, а клиентская валидация — только UX. */
+function validateBooking(d){
+  const errors = {};
+  const name = sanitizeInput(d.name, 100);
+  const phone = sanitizeInput(d.phone, 20);
+  const guests = parseInt(d.guests, 10);
+  const date = String(d.date || '');
+  const time = String(d.time || '');
+  const comment = sanitizeInput(d.comment, 500);
+
+  if (name.length < 2) errors.name = 'Укажите имя (минимум 2 символа)';
+  if (!/^\+?[\d\s()-]{7,20}$/.test(phone)) errors.phone = 'Укажите корректный номер телефона';
+  if (!Number.isInteger(guests) || guests < 1 || guests > 60) errors.guests = 'От 1 до 60 гостей';
+  const today = new Date(); today.setHours(0,0,0,0);
+  if (!date || new Date(date) < today) errors.date = 'Дата не может быть в прошлом';
+  if (!/^\d{2}:\d{2}$/.test(time)) errors.time = 'Выберите время';
+
+  return { ok: Object.keys(errors).length === 0, errors, clean: { name, phone, guests, date, time, comment } };
+}
+
+/* ---------- 4. Rate limiting (имитация) ----------
+   Не более 3 попыток отправки формы в минуту. Счётчик хранится в переменной
+   в памяти вкладки (НЕ в localStorage — артефакты Claude.ai намеренно не
+   используют браузерное хранилище, но это и правильно с точки зрения
+   безопасности демо: реальный rate limit не должен жить в браузере вообще).
+   ВАЖНО, честно: этот клиентский счётчик — только для UX (быстрая обратная
+   связь пользователю) и обнуляется перезагрузкой страницы. Он НЕ является
+   защитой сам по себе — атакующий, скриптующий запросы напрямую в API, его
+   просто не увидит. Реальный rate limit обязан быть на сервере:
+   в Supabase это Edge Function перед вставкой в bookings, которая считает
+   количество запросов за последние 60 секунд по IP и/или номеру телефона
+   (таблица-счётчик в Postgres или Upstash Redis), либо ограничение на уровне
+   CDN/edge (Cloudflare Rate Limiting) ещё до того, как запрос дойдёт до кода. */
+const RATE_LIMIT = { max: 3, windowMs: 60000, hits: [] };
+function checkRateLimit(){
+  const now = Date.now();
+  RATE_LIMIT.hits = RATE_LIMIT.hits.filter(t => now - t < RATE_LIMIT.windowMs);
+  if (RATE_LIMIT.hits.length >= RATE_LIMIT.max){
+    const oldest = RATE_LIMIT.hits[0];
+    const waitSec = Math.ceil((RATE_LIMIT.windowMs - (now - oldest)) / 1000);
+    return { allowed:false, waitSec };
+  }
+  return { allowed:true };
+}
+function recordAttempt(){ RATE_LIMIT.hits.push(Date.now()); }
+
+/* ---------- 5. CSRF (имитация) ----------
+   Скрытый токен генерируется один раз при загрузке страницы и вставляется
+   в каждую форму. При отправке форма обязана вернуть тот же токен.
+   ЧЕСТНО: в пределах одной статической HTML-страницы это не может по-
+   настоящему смоделировать межсайтовую подделку запроса — здесь просто
+   неоткуда взяться "чужой" вредоносной странице, отправляющей форму от
+   имени пользователя, поэтому проверка тут всегда пройдёт успешно.
+   Настоящая защита в проекте — встроенная: Next.js Server Actions
+   автоматически сверяют заголовок Origin запроса с адресом приложения на
+   каждый вызов мутации, плюс cookies сессии выставляются с SameSite=Lax,
+   что само по себе не даёт браузеру отправить их с чужого домена. Ручной
+   CSRF-токен, как ниже, нужен только если бы бронирование шло через
+   классический REST-эндпоинт с cookie-сессией без такой встроенной защиты. */
+function generateToken(){
+  const arr = new Uint32Array(4);
+  crypto.getRandomValues(arr);
+  return Array.from(arr, n => n.toString(16)).join('');
+}
+const CSRF_TOKEN = generateToken();
+
+/* ---------- 6. Имитация серверного round-trip ----------
+   Оборачиваем validateBooking в Promise с задержкой — как будто запрос
+   реально уходит на сервер (в реальности — Supabase Server Action). */
+function simulateServerRequest(formData, csrfFromForm){
+  return new Promise(resolve => {
+    setTimeout(() => {
+      if (csrfFromForm !== CSRF_TOKEN){
+        resolve({ ok:false, error:'Сессия устарела. Обновите страницу и попробуйте снова.' });
+        return;
+      }
+      const result = validateBooking(formData); // повторная проверка "на сервере"
+      if (!result.ok){
+        resolve({ ok:false, error:'Проверьте выделенные поля.', fieldErrors: result.errors });
+        return;
+      }
+      resolve({ ok:true, clean: result.clean });
+    }, 700 + Math.random()*400);
+  });
+}
+
+/* ---------- Маскирование телефона в кабинете владельца ----------
+   Не показываем полный номер по умолчанию даже авторизованному владельцу —
+   минимизация раскрытия персональных данных (data minimization). Показ по
+   клику логируется на реальном бэкенде (кто и когда открыл номер гостя). */
+function maskPhone(p){
+  const digits = String(p).replace(/\D/g,'');
+  if (digits.length < 6) return p;
+  return p.slice(0,7) + ' •••-••-' + p.slice(-2);
+}
+
+/* ---------- иконки (переиспользуемый набор) ---------- */
+const ICONS = {
+  star:'<path d="M12 3l2.7 5.6 6.1.8-4.5 4.2 1.1 6-5.4-2.9-5.4 2.9 1.1-6L3.2 9.4l6.1-.8z"/>',
+  dish:'<path d="M4 17h16M6 17a6 6 0 0 1 12 0M12 8V6M3 20h18"/>',
+  arch:'<path d="M5 21V11a7 7 0 0 1 14 0v10M3 21h18M12 4v2"/>',
+  family:'<circle cx="8" cy="7" r="2.5"/><circle cx="16" cy="8.5" r="2"/><path d="M3.5 20v-3a4.5 4.5 0 0 1 9 0v3M14 20v-2.5a3.5 3.5 0 0 1 6.5-1.8"/>',
+  parking:'<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 16V8h4a2.5 2.5 0 0 1 0 5H9"/>',
+  wifi:'<path d="M4 9.5a12 12 0 0 1 16 0M7 13a8 8 0 0 1 10 0M10 16.5a4 4 0 0 1 4 0M12 19h.01"/>',
+  vip:'<path d="M4 8l4 4 4-6 4 6 4-4v9H4z"/>',
+  namaz:'<path d="M6 21V12a6 6 0 0 1 12 0v9M4 21h16M12 3v2"/>',
+  kids:'<circle cx="12" cy="8" r="3"/><path d="M6 21c0-3.3 2.7-6 6-6s6 2.7 6 6"/>',
+  ac:'<path d="M12 3v18M5 6.5l14 11M19 6.5l-14 11"/>',
+  card:'<rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10.5h18M7 15.5h4"/>',
+  delivery:'<path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7M7 18h.01M17 18h.01"/>',
+  booking:'<rect x="4" y="5" width="16" height="16" rx="2.5"/><path d="M8 3v4M16 3v4M4 10h16M9.5 15l2 2 3.5-4"/>',
+  music:'<path d="M9 18V6l10-2v12M6.5 18h.01M16.5 16h.01"/>',
+  phone:'<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2z"/>',
+  mail:'<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 7.5l9 6 9-6"/>',
+  pin:'<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/>',
+  shield:'<path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/>',
+  check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+  x:'<path d="M6 6l12 12M18 6L6 18"/>',
+  back:'<path d="M15 5l-7 7 7 7"/>'
+};
+function ic(name, cls){ return `<svg class="${cls||''}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ICONS[name]||ICONS.star}</svg>`; }
+</script>
+<script>
+/* ============================================================================
+   ДАННЫЕ. В реальном продукте это строки таблиц restaurants / menu_items /
+   reviews / bookings в Supabase, а не JS-константы — здесь это моки для демо.
+   ============================================================================ */
+
+const U = (id,w) => `https://images.unsplash.com/${id}?q=80&w=${w}&auto=format&fit=crop`;
+const fmt = n => new Intl.NumberFormat('ru-RU').format(n) + ' сум';
+
+const DISTRICTS = [
+  'Мирзо-Улугбекский','Юнусабадский','Чиланзарский','Мирабадский','Яшнабадский',
+  'Шайхантахурский','Яккасарайский','Сергелийский','Учтепинский','Бектемирский'
+];
+
+// общий пул блюд — карточки чайхан ссылаются на id из этого пула
+const DISH_POOL = {
+  'plov-toy':        { cat:'plov',     title:'Той палов',            desc:'Свадебный плов с казы, нутом и жёлтой морковью', price:55000, img:'photo-1596797038530-2c107229654b' },
+  'plov-chayxona':   { cat:'plov',     title:'Чайханский плов',       desc:'Классический плов из девзиры на хлопковом масле', price:45000, img:'photo-1512058564366-18510be2db19' },
+  'shashlik-lamb':   { cat:'shashlik', title:'Шашлык из баранины',    desc:'Мякоть молодого барашка, маринад на луке и зире', price:28000, img:'photo-1555939594-58d7cb561ad1' },
+  'shashlik-molotiy':{ cat:'shashlik', title:'Молотый шашлык',        desc:'Рубленый фарш с курдюком, сумах и лук', price:24000, img:'photo-1529193591184-b1d58069ecdd' },
+  'mangal-ribs':     { cat:'mangal',   title:'Рёбра на мангале',      desc:'Бараньи рёбра томлёные, затем обожжённые на углях', price:65000, img:'photo-1544025162-d76694265947' },
+  'mangal-jiz':      { cat:'mangal',   title:'Жиз-биз',               desc:'Обжарка на садже с домашней картошкой и зеленью', price:52000, img:'photo-1432139555190-58524dae6a55' },
+  'soup-lagman':     { cat:'soups',    title:'Уйгурский лагман',      desc:'Тянутая лапша, говядина, джусай и перец', price:38000, img:'photo-1547592166-23ac45744acd' },
+  'soup-shurpa':     { cat:'soups',    title:'Шурпа',                 desc:'Наваристый бульон на баранине, овощи крупной нарезки', price:35000, img:'photo-1603105037880-880cd4edfb0d' },
+  'salad-achichuk':  { cat:'salads',   title:'Аччик-чучук',           desc:'Помидоры, лук, райхон — пара к плову', price:18000, img:'photo-1540420773420-3366772f4999' },
+  'salad-tashkent':  { cat:'salads',   title:'Салат «Ташкент»',       desc:'Говяжий язык, редька, жареный лук', price:32000, img:'photo-1546069901-ba9599a7e63c' },
+  'dessert-halva':   { cat:'desserts', title:'Самаркандская халва',   desc:'Молочная халва с фисташкой, подаётся к чаю', price:22000, img:'photo-1587314168485-3236d6710814' },
+  'dessert-chak':    { cat:'desserts', title:'Чак-чак с мёдом',       desc:'Хрустящее тесто в горном мёде с кунжутом', price:20000, img:'photo-1551024506-0bccd828d307' },
+  'drink-tea':       { cat:'drinks',   title:'Чайник кок-чая',        desc:'Зелёный чай №95, заваривается трижды', price:12000, img:'photo-1556679343-c7306c1976bc' },
+  'drink-compote':   { cat:'drinks',   title:'Домашний компот',       desc:'Сухофрукты из Ферганской долины, без сахара', price:10000, img:'photo-1560508180-03f285f67ded' }
+};
+const CAT_LABELS = { plov:'Плов', shashlik:'Шашлык', mangal:'Мангал', soups:'Супы', salads:'Салаты', desserts:'Десерты', drinks:'Напитки' };
+
+// фото для ролей интерьера — переиспользуются у всех чайхан с этой особенностью
+const ROLE_IMG = {
+  hall:'photo-1590846406792-0adc7f938f1d', sufa:'photo-1600585154340-be6161a56a0c',
+  namaz:'photo-1584551246679-0daf3d275d0f', kids:'photo-1566454825481-9c31bd88c36f'
+};
+const GALLERY_POOL = [
+  ['photo-1517248135467-4c7edcad34c4','Атмосфера зала'], ['photo-1596797038530-2c107229654b','Плов в казане'],
+  ['photo-1555939594-58d7cb561ad1','Шашлык на углях'], ['photo-1590846406792-0adc7f938f1d','Интерьер зала'],
+  ['photo-1556679343-c7306c1976bc','Чайная церемония'], ['photo-1544025162-d76694265947','Блюда с мангала'],
+  ['photo-1547592166-23ac45744acd','Лагман ручной работы'], ['photo-1600585154340-be6161a56a0c','Летняя терраса'],
+  ['photo-1414235077428-338989a2e8c0','Открытая кухня'], ['photo-1432139555190-58524dae6a55','Жиз-биз на садже'],
+  ['photo-1546069901-ba9599a7e63c','Салат «Ташкент»'], ['photo-1587314168485-3236d6710814','Самаркандская халва']
+];
+function galleryFor(offset){
+  const out = [];
+  for (let i=0;i<4;i++) out.push(GALLERY_POOL[(offset+i) % GALLERY_POOL.length]);
+  return out;
+}
+
+const REVIEW_POOL = {
+  shark:[
+    ['Азиз Каримов',5,'Отмечали юбилей отца на 40 человек. Плов — лучший в городе, а отдельная комната для намаза оказалась очень кстати.','Март 2026'],
+    ['Мадина Юсупова',5,'Приходим всей семьёй по пятницам. Дети в игровой, мы на суфе с чаем. Лагман тянут прямо при вас.','Февраль 2026']
+  ],
+  navruz:[
+    ['Шерзод Т.',5,'Проводили деловой ужин с партнёрами — VIP-зал и рёбра на мангале произвели впечатление.','Май 2026'],
+    ['Гулноза Р.',5,'Очень элегантный зал, отличный сервис. Немного дороже среднего, но оно того стоит.','Апрель 2026']
+  ],
+  ipak:[
+    ['Отабек Н.',5,'Лагман тянут вручную — детям нравится наблюдать. Парковка рядом, заехали без проблем.','Июнь 2026'],
+    ['Камола С.',4,'Домашняя атмосфера, шурпа как у бабушки. Иногда людно в обед, лучше бронировать заранее.','Май 2026']
+  ],
+  otalar:[
+    ['Бахтиёр У.',4,'Простая, честная кухня без наценки за антураж. То, что нужно на обеденный перерыв.','Апрель 2026'],
+    ['Зарина Х.',4,'Аккуратно, быстро, недорого. Плов немного проще, чем в дорогих чайханах, но очень вкусный.','Март 2026']
+  ],
+  bahor:[
+    ['Дилором А.',5,'Свежие салаты, лёгкая атмосфера — хорошее место для дневного обеда с подругами.','Июнь 2026'],
+    ['Жасур К.',5,'Взяли детей в игровую зону — час спокойно посидели за столом. Спасибо!','Май 2026']
+  ],
+  chinor:[
+    ['Фарход Б.',4,'Дым мангала, шум, компания друзей — то, что нужно вечером в пятницу.','Июнь 2026'],
+    ['Наргиза Э.',4,'Терраса под чинарой особенно хороша летом. Заказывали жиз-биз — очень сытно.','Май 2026']
+  ],
+  malika:[
+    ['Сардор И.',5,'Организовывали приём для иностранных партнёров — впечатлены и залом, и подачей.','Июль 2026'],
+    ['Мунира Ж.',5,'Премиальный уровень во всём, включая сервис. Дороже других, но для особого случая — идеально.','Июнь 2026']
+  ],
+  doston:[
+    ['Хуршид П.',5,'Той палов заказывали на помолвку — гости до сих пор вспоминают. Порции огромные.','Май 2026'],
+    ['Севара Г.',5,'Атмосфера настоящего праздника, даже в обычный день. Очень рекомендую на большие компании.','Апрель 2026']
+  ],
+  guliston:[
+    ['Акмал Р.',4,'Сбалансированное меню, спокойная обстановка, разумные цены — стабильный выбор.','Июнь 2026'],
+    ['Дилноза Т.',4,'Уютно, по-домашнему. Хорошее место для встречи с коллегами после работы.','Май 2026']
+  ],
+  tandir:[
+    ['Фаррух Д.',4,'Лепёшки из тандыра — просто огонь, в прямом смысле. Бюджетно и быстро для обеда.','Июнь 2026'],
+    ['Зилола М.',4,'Взяли жиз-биз навынос — заказ собрали за 10 минут. Хорошее качество за свои деньги.','Май 2026']
+  ]
+};
+
+const RESTAURANTS = [
+  { id:'shark',   name:'Чайхана «Шарк»',       district:'Мирзо-Улугбекский', tagline:'Флагман сети — плов из казана и суфа под виноградником', priceLevel:2, priceMult:1.0,  avgCheck:85000,  rating:4.8, reviewsCount:214, features:{sufa:true,namaz:true,kids:true,parking:true,vip:true,music:false,delivery:true}, hero:'photo-1517248135467-4c7edcad34c4', dishes:['plov-toy','plov-chayxona','shashlik-lamb','soup-lagman','salad-achichuk','dessert-halva'], galleryOffset:0, phone:'+998 71 200-00-00',
+    about:['Мы открылись в 2013 году как небольшая махаллинская чайхана на шесть столов. Сегодня это дом на двести гостей, но правило осталось прежним: плов готовится в одном казане, а чай подаётся первым, ещё до меню.','Каждое блюдо готовят повара, выросшие на этой кухне — по пятницам к нам приходят три поколения одних и тех же гостей.'] },
+  { id:'navruz',  name:'Чайхана «Наврўз»',     district:'Юнусабадский',      tagline:'Премиальный зал для деловых встреч и приёмов', priceLevel:3, priceMult:1.3, avgCheck:145000, rating:4.9, reviewsCount:98,  features:{sufa:true,namaz:true,kids:false,parking:true,vip:true,music:true,delivery:false}, hero:'photo-1590846406792-0adc7f938f1d', dishes:['plov-toy','mangal-ribs','shashlik-lamb','salad-tashkent','dessert-chak','drink-tea'], galleryOffset:3, phone:'+998 71 205-11-11',
+    about:['«Наврўз» — чайхана для тех, кто ценит детали: резные потолки, латунные светильники и сервис на уровне лучших ресторанов Ташкента.','Отдельные VIP-кабины и живой дутар по вечерам делают заведение популярным для деловых приёмов и торжеств.'] },
+  { id:'ipak',    name:'Чайхана «Ипак йўли»',  district:'Чиланзарский',      tagline:'Семейная чайхана с лагманом ручной лепки', priceLevel:2, priceMult:0.95, avgCheck:78000,  rating:4.6, reviewsCount:156, features:{sufa:false,namaz:true,kids:true,parking:true,vip:false,music:false,delivery:true}, hero:'photo-1600585154340-be6161a56a0c', dishes:['soup-lagman','soup-shurpa','shashlik-molotiy','salad-achichuk','plov-chayxona','drink-compote'], galleryOffset:6, phone:'+998 71 210-22-22',
+    about:['Названа в честь Великого шёлкового пути — здесь собраны рецепты, которые путешествовали через Ферганскую долину веками.','Просторный зал и детская зона делают «Ипак йўли» любимым местом для больших семейных обедов по выходным.'] },
+  { id:'otalar',  name:'Ошхона «Оталар»',      district:'Мирабадский',       tagline:'Простая домашняя кухня по честной цене', priceLevel:1, priceMult:0.85, avgCheck:45000,  rating:4.4, reviewsCount:302, features:{sufa:true,namaz:false,kids:false,parking:false,vip:false,music:false,delivery:true}, hero:'photo-1414235077428-338989a2e8c0', dishes:['plov-chayxona','soup-shurpa','salad-achichuk','shashlik-molotiy','drink-tea','dessert-halva'], galleryOffset:9, phone:'+998 71 215-33-33',
+    about:['«Оталар» — значит «предки»: рецепты передаются от одного повара к другому без изменений уже три поколения.','Без лишнего антуража, зато с честными порциями и ценами — сюда приходят на обеденный перерыв каждый день.'] },
+  { id:'bahor',   name:'Чайхана «Бахор»',      district:'Яшнабадский',       tagline:'Светлый зал, свежие салаты и детская игровая', priceLevel:2, priceMult:1.05, avgCheck:92000,  rating:4.7, reviewsCount:121, features:{sufa:true,namaz:true,kids:true,parking:true,vip:false,music:false,delivery:false}, hero:'photo-1556679343-c7306c1976bc', dishes:['salad-tashkent','salad-achichuk','plov-chayxona','dessert-chak','drink-compote','shashlik-lamb'], galleryOffset:1, phone:'+998 71 220-44-44',
+    about:['«Бахор» значит «весна» — открытая терраса с цветниками и много естественного света в зале.','Отдельная детская зона с аниматором по выходным — родители спокойно обедают, пока дети заняты игрой.'] },
+  { id:'chinor',  name:'Чайхана «Чинор»',      district:'Шайхантахурский',   tagline:'Дым мангала и терраса под старым чинаром', priceLevel:1, priceMult:0.9, avgCheck:52000,  rating:4.3, reviewsCount:187, features:{sufa:false,namaz:false,kids:true,parking:true,vip:false,music:false,delivery:true}, hero:'photo-1547592166-23ac45744acd', dishes:['mangal-jiz','mangal-ribs','shashlik-molotiy','soup-shurpa','drink-tea','plov-chayxona'], galleryOffset:4, phone:'+998 71 225-55-55',
+    about:['Название — в честь векового чинара во дворе, под которым стоят столы уже больше двадцати лет.','Простая, шумная, дружелюбная чайхана — сюда приходят компанией после работы на шашлык и мангал.'] },
+  { id:'malika',  name:'Чайхана «Малика»',     district:'Яккасарайский',     tagline:'Королевский приём для торжеств и банкетов', priceLevel:3, priceMult:1.35, avgCheck:160000, rating:4.9, reviewsCount:74,  features:{sufa:true,namaz:true,kids:true,parking:false,vip:true,music:true,delivery:false}, hero:'photo-1544025162-d76694265947', dishes:['plov-toy','mangal-ribs','shashlik-lamb','salad-tashkent','dessert-chak','drink-tea'], galleryOffset:7, phone:'+998 71 230-66-66',
+    about:['«Малика» — значит «королева»: банкетный зал на 150 гостей, живая музыка и подача блюд как на приёме.','Здесь принимают самые важные события в жизни семьи — от помолвок до юбилеев.'] },
+  { id:'doston',  name:'Чайхана «Достон»',     district:'Сергелийский',      tagline:'Той палов и настроение большого праздника', priceLevel:1, priceMult:0.88, avgCheck:48000,  rating:4.5, reviewsCount:143, features:{sufa:false,namaz:true,kids:false,parking:true,vip:false,music:false,delivery:false}, hero:'photo-1596797038530-2c107229654b', dishes:['plov-toy','plov-chayxona','mangal-ribs','soup-lagman','dessert-halva','drink-compote'], galleryOffset:2, phone:'+998 71 235-77-77',
+    about:['«Достон» — «легенда»: чайхана специализируется на праздничном той-палове для торжеств и помолвок.','Большие казаны и щедрые порции — отсюда никто не уходит голодным.'] },
+  { id:'guliston',name:'Чайхана «Гулистон»',   district:'Учтепинский',       tagline:'Сбалансированное меню в спокойной обстановке', priceLevel:2, priceMult:1.0, avgCheck:88000,  rating:4.6, reviewsCount:109, features:{sufa:true,namaz:false,kids:true,parking:true,vip:false,music:false,delivery:true}, hero:'photo-1555939594-58d7cb561ad1', dishes:['plov-chayxona','salad-achichuk','shashlik-lamb','soup-shurpa','dessert-chak','drink-tea'], galleryOffset:5, phone:'+998 71 240-88-88',
+    about:['«Гулистон» — «страна цветов»: небольшой уютный дворик с зеленью прямо в центре района.','Ровное, разнообразное меню без явного акцента на одно блюдо — хороший выбор для любой компании.'] },
+  { id:'tandir',  name:'Ошхона «Тандир»',      district:'Бектемирский',      tagline:'Бюджетный мангал и свежий хлеб из тандыра', priceLevel:1, priceMult:0.8, avgCheck:40000,  rating:4.4, reviewsCount:167, features:{sufa:false,namaz:true,kids:false,parking:false,vip:false,music:false,delivery:true}, hero:'photo-1432139555190-58524dae6a55', dishes:['mangal-jiz','mangal-ribs','shashlik-molotiy','plov-chayxona','soup-shurpa','drink-compote'], galleryOffset:8, phone:'+998 71 245-99-99',
+    about:['Название говорит само за себя — свежий лепёшечный хлеб прямо из тандыра каждые полчаса.','Быстрое, бюджетное и сытное место — популярно у тех, кто работает поблизости.'] }
+];
+
+// удобства — часть выводится всегда, часть зависит от features конкретной чайханы
+function facilitiesFor(r){
+  const list = [
+    { icon:'wifi', title:'Wi-Fi', desc:'Быстрый интернет во всех залах' },
+  ];
+  if (r.features.parking) list.push({ icon:'parking', title:'Парковка', desc:'Своя стоянка рядом со входом' });
+  if (r.features.vip) list.push({ icon:'vip', title:'VIP-комнаты', desc:'Отдельные кабины для компаний' });
+  if (r.features.namaz) list.push({ icon:'namaz', title:'Место для намаза', desc:'Комната с тахаратной, открыта всегда' });
+  if (r.features.kids) list.push({ icon:'kids', title:'Детская зона', desc:'Игровая комната и детское меню' });
+  list.push({ icon:'ac', title:'Кондиционер', desc:'Комфортно в любую погоду' });
+  list.push({ icon:'card', title:'Оплата картой', desc:'Uzcard, Humo, Visa, Payme' });
+  if (r.features.delivery) list.push({ icon:'delivery', title:'Доставка', desc:'По городу в пределах района' });
+  if (r.features.music) list.push({ icon:'music', title:'Живая музыка', desc:'По пятницам и субботам' });
+  list.push({ icon:'booking', title:'Бронирование', desc:'Онлайн, без предоплаты' });
+  return list;
+}
+function interiorFor(r){
+  const list = [{ title:'Главный зал', desc:'Просторный зал для гостей заведения', img:ROLE_IMG.hall }];
+  if (r.features.sufa) list.push({ title:'Суфа', desc:'Традиционные топчаны во дворе', img:ROLE_IMG.sufa });
+  if (r.features.namaz) list.push({ title:'Место для намаза', desc:'Отдельная тихая комната', img:ROLE_IMG.namaz });
+  if (r.features.kids) list.push({ title:'Детская зона', desc:'Игровая комната для детей', img:ROLE_IMG.kids });
+  return list;
+}
+function dishesFor(r){
+  return r.dishes.map(id => {
+    const d = DISH_POOL[id];
+    return { ...d, price: Math.round(d.price * r.priceMult / 1000) * 1000 };
+  });
+}
+function byId(id){ return RESTAURANTS.find(r => r.id === id); }
+</script>
+<script>
+/* ============================================================================
+   РЕНДЕР: каталог + фильтры
+   ============================================================================ */
+function attachReveals(root){
+  root.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  root.querySelectorAll('[data-cnt]').forEach(el => countObserver.observe(el));
+}
+const revealObserver = new IntersectionObserver(es => es.forEach(x => {
+  if (x.isIntersecting){ x.target.classList.add('on'); revealObserver.unobserve(x.target); }
+}), { rootMargin:'-60px' });
+const countObserver = new IntersectionObserver(es => es.forEach(x => {
+  if (!x.isIntersecting) return;
+  countObserver.unobserve(x.target);
+  const el = x.target, target = +el.dataset.cnt, sfx = el.dataset.sfx || '', start = performance.now();
+  const tick = now => {
+    const p = Math.min((now - start) / 1500, 1);
+    el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + sfx;
+    if (p < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}), { rootMargin:'-80px' });
+
+const FILTERS = { district:'', price:'', sufa:false, namaz:false, kids:false, parking:false, q:'' };
+
+function initFilters(){
+  const sel = document.getElementById('fDistrict');
+  sel.innerHTML = '<option value="">Все районы</option>' + DISTRICTS.map(d => `<option value="${e(d)}">${e(d)}</option>`).join('');
+  sel.addEventListener('change', () => { FILTERS.district = sel.value; renderCatalog(); });
+  document.getElementById('fPrice').addEventListener('change', ev => { FILTERS.price = ev.target.value; renderCatalog(); });
+  document.getElementById('searchInput').addEventListener('input', ev => {
+    FILTERS.q = sanitizeInput(ev.target.value, 60).toLowerCase();
+    renderCatalog();
+  });
+}
+function toggleChip(btn, key){
+  FILTERS[key] = !FILTERS[key];
+  btn.classList.toggle('on', FILTERS[key]);
+  btn.setAttribute('aria-pressed', String(FILTERS[key]));
+  renderCatalog();
+}
+function resetFilters(){
+  FILTERS.district=''; FILTERS.price=''; FILTERS.sufa=FILTERS.namaz=FILTERS.kids=FILTERS.parking=false; FILTERS.q='';
+  document.getElementById('fDistrict').value='';
+  document.getElementById('fPrice').value='';
+  document.getElementById('searchInput').value='';
+  document.querySelectorAll('.chip').forEach(c => { c.classList.remove('on'); c.setAttribute('aria-pressed','false'); });
+  renderCatalog();
+}
+function matches(r){
+  if (FILTERS.district && r.district !== FILTERS.district) return false;
+  if (FILTERS.price && String(r.priceLevel) !== FILTERS.price) return false;
+  if (FILTERS.sufa && !r.features.sufa) return false;
+  if (FILTERS.namaz && !r.features.namaz) return false;
+  if (FILTERS.kids && !r.features.kids) return false;
+  if (FILTERS.parking && !r.features.parking) return false;
+  if (FILTERS.q && !r.name.toLowerCase().includes(FILTERS.q)) return false;
+  return true;
+}
+function starsHtml(rating){
+  const full = Math.round(rating);
+  let s = '';
+  for (let i=0;i<5;i++){
+    s += `<svg viewBox="0 0 24 24" style="width:15px;height:15px" fill="${i<full?'var(--gold)':'var(--sand)'}"><path d="M12 3l2.7 5.6 6.1.8-4.5 4.2 1.1 6-5.4-2.9-5.4 2.9 1.1-6L3.2 9.4l6.1-.8z"/></svg>`;
+  }
+  return s;
+}
+function rcardHtml(r){
+  const badgeDefs = [
+    r.features.sufa && ['arch','Суфа'],
+    r.features.namaz && ['namaz','Намаз'],
+    r.features.kids && ['kids','Детям'],
+    r.features.parking && ['parking','Парковка']
+  ].filter(Boolean);
+  return `
+  <article class="rcard reveal">
+    <a class="rcard-img" href="#/restaurant/${e(r.id)}" aria-label="Открыть ${e(r.name)}">
+      <img src="${U(r.hero,900)}" alt="${e(r.name)}" loading="lazy">
+      <span class="rcard-district">${e(r.district)}</span>
+      <span class="rcard-price">~${fmt(r.avgCheck)}/чел</span>
+    </a>
+    <div class="rcard-body">
+      <div class="rcard-top">
+        <h3>${e(r.name)}</h3>
+        <span class="rrating">${ic('star')} ${r.rating.toFixed(1)}</span>
+      </div>
+      <p class="rcard-tag">${e(r.tagline)}</p>
+      <div class="rbadges">${badgeDefs.map(([icn,label]) => `<span class="ibadge">${ic(icn)}${e(label)}</span>`).join('')}</div>
+      <div class="rcard-foot">
+        <a class="btn btn-ghost" href="#/restaurant/${e(r.id)}">Подробнее</a>
+        <a class="btn btn-primary" href="#/restaurant/${e(r.id)}#booking">Забронировать</a>
+      </div>
+    </div>
+  </article>`;
+}
+function renderCatalog(){
+  const list = RESTAURANTS.filter(matches);
+  const grid = document.getElementById('catalogGrid');
+  document.getElementById('resultsBar').innerHTML = `Найдено: <b>${list.length}</b> из ${RESTAURANTS.length} чайхан`;
+  if (!list.length){
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">${ic('star')}<p>Ничего не найдено. Попробуйте изменить фильтры.</p></div>`;
+    return;
+  }
+  grid.innerHTML = list.map(rcardHtml).join('');
+  attachReveals(grid);
+}
+</script>
+<script>
+/* ============================================================================
+   РЕНДЕР: страница чайханы (детальный экран)
+   ============================================================================ */
+let CUR_R = null;        // текущая открытая чайхана
+let MENU_CAT = null;     // активная категория меню
+let REV_I = 0;           // индекс отзыва в слайдере
+let LB_IMAGES = [];      // изображения для текущего lightbox
+let LB_I = 0;
+
+function renderDetail(id){
+  const r = byId(id);
+  const root = document.getElementById('detailRoot');
+  if (!r){
+    root.innerHTML = `<div class="container" style="padding:160px 0 80px;text-align:center"><p>Чайхана не найдена.</p><a class="btn btn-primary" href="#/catalog" style="margin-top:16px">К каталогу</a></div>`;
+    return;
+  }
+  CUR_R = r;
+  MENU_CAT = null;
+  REV_I = 0;
+  const gallery = galleryFor(r.galleryOffset);
+  const interior = interiorFor(r);
+  const facilities = facilitiesFor(r);
+  const dishes = dishesFor(r);
+  const cats = [...new Set(dishes.map(d => d.cat))];
+  MENU_CAT = cats[0];
+  const reviews = REVIEW_POOL[r.id] || [];
+
+  root.innerHTML = `
+  <div class="subnav">
+    <div class="container subnav-in">
+      <a class="back-link" href="#/catalog">${ic('back')} К каталогу</a>
+      <div class="subnav-links">
+        <a href="#d-about">О месте</a><a href="#d-menu">Меню</a><a href="#d-gallery">Галерея</a>
+        <a href="#d-reviews">Отзывы</a><a href="#d-booking">Бронь</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="rhero">
+    <div class="rhero-bg" style="background-image:url('${U(r.hero,2000)}')"></div>
+    <div class="rhero-ov"></div>
+    <div class="container">
+      <p class="rhero-eyebrow">${e(r.district)} район</p>
+      <h1>${e(r.name)}</h1>
+      <p class="sub">${e(r.tagline)}</p>
+      <div class="rhero-btns">
+        <a class="btn btn-gold btn-lg" href="#d-booking">Забронировать</a>
+        <a class="btn btn-outline btn-lg" href="#d-menu">Посмотреть меню</a>
+      </div>
+      <ul class="rhero-badges">
+        <li class="badge">${ic('star')} ${r.rating.toFixed(1)} · ${r.reviewsCount} отзывов</li>
+        <li class="badge">${ic('dish')} ~${fmt(r.avgCheck)} на человека</li>
+        ${r.features.sufa ? `<li class="badge">${ic('arch')} Суфа</li>` : ''}
+        ${r.features.namaz ? `<li class="badge">${ic('namaz')} Место для намаза</li>` : ''}
+      </ul>
+    </div>
+  </section>
+
+  <section id="d-about">
+    <div class="container about-grid about">
+      <div class="reveal"><div class="about-img"><img src="${U(r.hero,1200)}" alt="${e(r.name)}" loading="lazy"></div></div>
+      <div>
+        <div class="shead left reveal">
+          <p class="eyebrow">О заведении</p>
+          <h2>${e(r.name)}</h2>
+          ${dividerSvg()}
+        </div>
+        ${r.about.map(p => `<p class="t reveal">${e(p)}</p>`).join('')}
+        <div class="stats reveal">
+          <div class="stat"><b data-cnt="${r.reviewsCount}">0</b><span>отзывов гостей</span></div>
+          <div class="stat"><b data-cnt="${Math.round(r.avgCheck/1000)}" data-sfx="K">0</b><span>средний чек, сум</span></div>
+          <div class="stat"><b data-cnt="${Math.round(r.rating*10)}" data-sfx="">0</b><span>рейтинг ×10</span></div>
+          <div class="stat"><b data-cnt="${DISTRICTS.indexOf(r.district)+1}">0</b><span>№ района в списке</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-ivory" id="d-interior">
+    <div class="container">
+      <div class="shead reveal"><p class="eyebrow">Интерьер</p><h2>Атмосфера заведения</h2>${dividerSvg()}</div>
+      <div class="int-grid">
+        ${interior.map(sp => `
+          <div class="int-card reveal">
+            <img src="${U(sp.img,900)}" alt="${e(sp.title)}" loading="lazy">
+            <div class="int-txt"><h3>${e(sp.title)}</h3><p>${e(sp.desc)}</p></div>
+          </div>`).join('')}
+      </div>
+    </div>
+  </section>
+
+  <section id="d-menu">
+    <div class="container">
+      <div class="shead reveal"><p class="eyebrow">Меню</p><h2>Что попробовать</h2>${dividerSvg()}</div>
+      <div class="tabs" id="menuTabs">
+        ${cats.map(c => `<button class="tab ${c===MENU_CAT?'on':''}" data-cat="${c}" onclick="setMenuCat('${c}')">${e(CAT_LABELS[c])}</button>`).join('')}
+      </div>
+      <div class="menu-grid fade-in" id="menuGrid"></div>
+    </div>
+  </section>
+
+  <section class="dark" id="d-facilities">
+    <div class="container">
+      <div class="shead dark reveal"><p class="eyebrow">Удобства</p><h2>Продумано до мелочей</h2>${dividerSvg(true)}</div>
+      <div class="fac-grid">
+        ${facilities.map(f => `
+          <div class="fac reveal">
+            <span class="fac-ic">${ic(f.icon)}</span>
+            <h3>${e(f.title)}</h3><p>${e(f.desc)}</p>
+          </div>`).join('')}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-ivory" id="d-gallery">
+    <div class="container">
+      <div class="shead reveal"><p class="eyebrow">Галерея</p><h2>Атмосфера в кадрах</h2>${dividerSvg()}</div>
+      <div class="gal" id="galWrap">
+        ${gallery.map((g,i) => `<button onclick="lbOpen(${i})" aria-label="Открыть фото: ${e(g[1])}"><img src="${U(g[0],800)}" alt="${e(g[1])}" loading="lazy"></button>`).join('')}
+      </div>
+    </div>
+  </section>
+
+  <section id="d-reviews">
+    <div class="container">
+      <div class="shead reveal"><p class="eyebrow">Отзывы</p><h2>Гости говорят</h2>${dividerSvg()}</div>
+      <div class="rev-wrap">
+        <div id="revBox"></div>
+        <div class="rev-nav">
+          <button class="rev-btn" aria-label="Предыдущий" onclick="revNav(-1)">${ic('back')}</button>
+          <div class="dots" id="revDots"></div>
+          <button class="rev-btn" aria-label="Следующий" onclick="revNav(1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" style="padding:0">
+    <div class="cta-bg" style="background-image:url('${U(r.hero,1600)}')"></div><div class="cta-ov"></div>
+    <div class="container" style="padding-top:90px;padding-bottom:90px">
+      ${dividerSvg(true,true)}
+      <h2>Стол в «${e(r.name)}» <span class="gold-grad">ждёт вас</span></h2>
+      <p>Забронируйте за минуту — подтвердим и встретим как дорогих гостей.</p>
+      <a href="#d-booking" class="btn btn-gold btn-lg">Забронировать стол</a>
+    </div>
+  </section>
+
+  <section class="bg-ivory" id="d-booking">
+    <div class="container book-grid">
+      <div class="reveal">
+        <div class="shead left"><p class="eyebrow">Бронирование</p><h2>Ваш стол уже ждёт</h2>${dividerSvg()}
+          <p class="desc">Заявка придёт владельцу мгновенно — в кабинет и в Telegram. Предоплата не нужна.</p></div>
+        <ul class="book-info">
+          <li>${ic('phone')}<a href="tel:${r.phone.replace(/\s|-/g,'')}"><b>${e(r.phone)}</b></a></li>
+          <li>${ic('clock')} Ежедневно · 09:00 — 23:00</li>
+          <li>${ic('pin')} ${e(r.district)} район, г. Ташкент</li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <div class="rl-banner" id="rlBanner">${ic('shield')}<span id="rlText"></span></div>
+        <form class="form" id="bookForm" novalidate data-rid="${e(r.id)}">
+          <input type="hidden" name="csrf" value="${CSRF_TOKEN}">
+          <div class="fgrid">
+            <div class="field" id="bf-name"><label for="b-name">Имя</label><input id="b-name" name="name" placeholder="Как к вам обращаться" maxlength="100"><p class="err">Укажите имя (минимум 2 символа)</p></div>
+            <div class="field" id="bf-phone"><label for="b-phone">Телефон</label><input id="b-phone" name="phone" type="tel" placeholder="+998 90 123-45-67" maxlength="20"><p class="err">Укажите корректный номер телефона</p></div>
+            <div class="field"><label for="b-guests">Гостей</label><select id="b-guests" name="guests"></select></div>
+            <div class="field" id="bf-date"><label for="b-date">Дата</label><input id="b-date" name="date" type="date"><p class="err">Дата не может быть в прошлом</p></div>
+            <div class="field"><label for="b-time">Время</label><select id="b-time" name="time"></select></div>
+            <div class="field fspan"><label for="b-comment">Комментарий (необязательно)</label><textarea id="b-comment" name="comment" maxlength="500" placeholder="Повод, пожелания к столу…"></textarea></div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg" id="bookBtn">Забронировать стол</button>
+          <p class="form-note">Демо: заявка сохраняется только в этой вкладке и видна в кабинете владельца «${e(r.name)}». Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</p>
+        </form>
+        <div class="success" id="bookSuccess">
+          <span class="succ-ic">${ic('check')}</span>
+          <h3>Бронь принята!</h3>
+          <p>Владелец «${e(r.name)}» подтвердит бронь в течение 15 минут. До встречи!</p>
+          <button onclick="resetBookForm()">Создать ещё одну бронь</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="d-contacts">
+    <div class="container">
+      <div class="shead reveal"><p class="eyebrow">Контакты</p><h2>Как нас найти</h2>${dividerSvg()}</div>
+      <div class="cont-grid">
+        <div class="reveal">
+          <ul class="cont-list">
+            <li><span class="cont-ic">${ic('pin')}</span><div><small>Район</small><p>${e(r.district)}, г. Ташкент</p></div></li>
+            <li><span class="cont-ic">${ic('phone')}</span><div><small>Телефон</small><a href="tel:${r.phone.replace(/\s|-/g,'')}">${e(r.phone)}</a></div></li>
+            <li><span class="cont-ic">${ic('clock')}</span><div><small>Режим работы</small><p>Ежедневно · 09:00 — 23:00</p></div></li>
+          </ul>
+        </div>
+        <div class="map reveal"><iframe src="https://www.openstreetmap.org/export/embed.html?bbox=69.20%2C41.26%2C69.35%2C41.36&layer=mapnik" title="Карта Ташкента" loading="lazy"></iframe></div>
+      </div>
+    </div>
+  </section>`;
+
+  renderMenuGrid();
+  renderReview();
+  attachReveals(root);
+  wireBookForm();
+  window.scrollTo(0,0);
+}
+function dividerSvg(dark,center){
+  const color = dark ? '#C59E42' : '#B2542E';
+  return `<svg class="divider" style="${center?'margin-left:auto;margin-right:auto;display:block':''}" viewBox="0 0 120 12" fill="none" stroke="${color}" stroke-width="1.2"><path d="M0 6h38" opacity=".5"/><path d="M82 6h38" opacity=".5"/><path d="M52 6l8-5 8 5-8 5z"/><circle cx="60" cy="6" r="1.6" fill="${color}" stroke="none"/></svg>`;
+}
+
+/* меню: табы категорий */
+function setMenuCat(c){
+  MENU_CAT = c;
+  document.querySelectorAll('#menuTabs .tab').forEach(t => t.classList.toggle('on', t.dataset.cat === c));
+  renderMenuGrid();
+}
+function renderMenuGrid(){
+  const grid = document.getElementById('menuGrid');
+  if (!grid || !CUR_R) return;
+  const items = dishesFor(CUR_R).filter(d => d.cat === MENU_CAT);
+  grid.classList.remove('fade-in'); void grid.offsetWidth; grid.classList.add('fade-in');
+  grid.innerHTML = items.map(d => `
+    <article class="dish">
+      <div class="dish-img"><img src="${U(d.img,800)}" alt="${e(d.title)}" loading="lazy"></div>
+      <div class="dish-b"><div class="dish-t"><h3>${e(d.title)}</h3><b>${fmt(d.price)}</b></div><p>${e(d.desc)}</p></div>
+    </article>`).join('');
+}
+
+/* галерея / lightbox */
+function lbOpen(i){
+  LB_IMAGES = galleryFor(CUR_R.galleryOffset);
+  LB_I = i;
+  lbSet();
+  document.getElementById('lb').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function lbClose(){ document.getElementById('lb').classList.remove('open'); document.body.style.overflow = ''; }
+function lbNav(d){ LB_I = (LB_I + d + LB_IMAGES.length) % LB_IMAGES.length; lbSet(); }
+function lbSet(){
+  const [id,alt] = LB_IMAGES[LB_I];
+  document.getElementById('lbImg').src = U(id,1400);
+  document.getElementById('lbImg').alt = alt;
+  document.getElementById('lbCap').textContent = alt;
+}
+document.getElementById('lb').addEventListener('click', ev => { if (ev.target.id==='lb') lbClose(); });
+document.addEventListener('keydown', ev => {
+  if (!document.getElementById('lb').classList.contains('open')) return;
+  if (ev.key==='Escape') lbClose();
+  if (ev.key==='ArrowLeft') lbNav(-1);
+  if (ev.key==='ArrowRight') lbNav(1);
+});
+
+/* отзывы */
+function initials(name){ return name.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase(); }
+const AV_COLORS = ['var(--terracotta)','var(--burgundy)','var(--bronze)','var(--cocoa)'];
+function renderReview(){
+  const box = document.getElementById('revBox');
+  const reviews = REVIEW_POOL[CUR_R.id] || [];
+  if (!box || !reviews.length) return;
+  const [name, rating, text, date] = reviews[REV_I];
+  box.innerHTML = `
+    <figure class="rev-card">
+      <div class="rev-top">
+        <span class="avatar-i" style="background:${AV_COLORS[REV_I % AV_COLORS.length]}">${e(initials(name))}</span>
+        <figcaption><b>${e(name)}</b><div class="rev-meta"><div class="stars">${starsHtml(rating)}</div><span class="rev-date">${e(date)}</span></div></figcaption>
+      </div>
+      <blockquote>«${e(text)}»</blockquote>
+    </figure>`;
+  document.getElementById('revDots').innerHTML = reviews.map((_,i) => `<button class="dot ${i===REV_I?'on':''}" aria-label="Отзыв ${i+1}" onclick="revGo(${i})"></button>`).join('');
+}
+function revNav(d){ const n = (REVIEW_POOL[CUR_R.id]||[]).length; REV_I = (REV_I + d + n) % n; renderReview(); }
+function revGo(i){ REV_I = i; renderReview(); }
+</script>
+<script>
+/* ============================================================================
+   ФОРМА БРОНИРОВАНИЯ: клиентская валидация → rate limit → CSRF →
+   "серверная" проверка (simulateServerRequest) → запись в BOOKINGS.
+   ============================================================================ */
+function wireBookForm(){
+  const form = document.getElementById('bookForm');
+  if (!form) return;
+
+  // заполняем select'ы (генерируются заново на каждый рендер детальной страницы)
+  const gSel = document.getElementById('b-guests');
+  gSel.innerHTML = Array.from({length:60},(_,i)=>i+1).map(n => `<option value="${n}" ${n===2?'selected':''}>${n===1?'1 гость':n+' гостей'}</option>`).join('');
+  const tSel = document.getElementById('b-time');
+  tSel.innerHTML = Array.from({length:14},(_,i)=>String(9+i).padStart(2,'0')+':00').map(t => `<option ${t==='19:00'?'selected':''}>${t}</option>`).join('');
+  const dInp = document.getElementById('b-date');
+  const todayISO = new Date().toISOString().split('T')[0];
+  dInp.min = todayISO; dInp.value = todayISO;
+
+  form.addEventListener('submit', onBookSubmit);
+}
+
+function clearFieldErrors(form){
+  form.querySelectorAll('.field').forEach(f => f.classList.remove('bad'));
+}
+function applyFieldErrors(form, errors){
+  clearFieldErrors(form);
+  Object.keys(errors||{}).forEach(key => {
+    const f = document.getElementById('bf-' + key);
+    if (f) f.classList.add('bad');
+  });
+}
+
+async function onBookSubmit(ev){
+  ev.preventDefault();
+  const form = ev.target;
+  const restaurantId = form.dataset.rid;
+  const btn = document.getElementById('bookBtn');
+  const rlBanner = document.getElementById('rlBanner');
+  const rlText = document.getElementById('rlText');
+
+  // 1) rate limit — проверяем ДО отправки запроса
+  const rl = checkRateLimit();
+  if (!rl.allowed){
+    rlText.textContent = `Слишком много попыток бронирования. Попробуйте снова через ${rl.waitSec} сек.`;
+    rlBanner.classList.add('show');
+    return;
+  }
+  rlBanner.classList.remove('show');
+  recordAttempt();
+
+  // 2) собираем и САНИТИЗИРУЕМ сырые данные формы (по id — явно и однозначно)
+  const raw = {
+    name: sanitizeInput(document.getElementById('b-name').value, 100),
+    phone: sanitizeInput(document.getElementById('b-phone').value, 20),
+    guests: document.getElementById('b-guests').value,
+    date: document.getElementById('b-date').value,
+    time: document.getElementById('b-time').value,
+    comment: sanitizeInput(document.getElementById('b-comment').value, 500)
+  };
+
+  // 3) клиентская валидация — мгновенная обратная связь
+  const clientCheck = validateBooking(raw);
+  if (!clientCheck.ok){
+    applyFieldErrors(form, clientCheck.errors);
+    return;
+  }
+  clearFieldErrors(form);
+
+  // 4) имитация запроса на сервер (CSRF + повторная валидация "на бэкенде")
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin"></span> Отправляем…';
+  const csrf = form.querySelector('[name=csrf]').value;
+  const serverRes = await simulateServerRequest(raw, csrf);
+  btn.disabled = false;
+  btn.textContent = 'Забронировать стол';
+
+  if (!serverRes.ok){
+    if (serverRes.fieldErrors) applyFieldErrors(form, serverRes.fieldErrors);
+    rlText.textContent = serverRes.error;
+    rlBanner.classList.add('show');
+    return;
+  }
+
+  // 5) успех — пишем в общее in-memory хранилище броней (видно в кабинете владельца)
+  const clean = serverRes.clean;
+  const booking = {
+    id: 'b_' + Date.now().toString(36),
+    name: clean.name, phone: clean.phone, guests: clean.guests,
+    date: clean.date, time: clean.time, comment: clean.comment,
+    status: 'new', createdAt: Date.now(), source: 'web'
+  };
+  if (!BOOKINGS[restaurantId]) BOOKINGS[restaurantId] = [];
+  BOOKINGS[restaurantId].unshift(booking);
+
+  form.style.display = 'none';
+  document.getElementById('bookSuccess').classList.add('show');
+}
+function resetBookForm(){
+  document.getElementById('bookSuccess').classList.remove('show');
+  const form = document.getElementById('bookForm');
+  form.style.display = '';
+  form.reset();
+  const todayISO = new Date().toISOString().split('T')[0];
+  document.getElementById('b-date').value = todayISO;
+  clearFieldErrors(form);
+}
+</script>
+<script>
+/* ============================================================================
+   ГЕНЕРАЦИЯ ДЕМО-БРОНЕЙ (детерминированно, без localStorage — только память
+   вкладки). В реальном продукте это таблица bookings в Supabase.
+   Используем простой seeded PRNG (mulberry32), чтобы при каждой перезагрузке
+   демо выглядело одинаково — удобно для показа клиенту / скриншотов.
+   ============================================================================ */
+function mulberry32(seed){
+  return function(){
+    seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function hashSeed(str){ let h=0; for (let i=0;i<str.length;i++) h=(h*31+str.charCodeAt(i))|0; return h; }
+
+const FIRST_NAMES = ['Азиз','Мадина','Отабек','Дилноза','Жасур','Камола','Фарход','Наргиза','Сардор','Севара','Бахтиёр','Зарина','Хуршид','Гулноза','Акмал'];
+const LAST_NAMES  = ['Каримов','Юсупова','Рахимов','Turaeva','Умаров','Собирова','Назаров','Эргашева','Исмоилов','Ганиева'];
+function randPhone(rand){
+  const codes=['90','91','93','94','97','99'];
+  const c = codes[Math.floor(rand()*codes.length)];
+  const n1 = String(Math.floor(100+rand()*900));
+  const n2 = String(Math.floor(10+rand()*90));
+  const n3 = String(Math.floor(10+rand()*90));
+  return `+998 ${c} ${n1}-${n2}-${n3}`;
+}
+function generateBookings(restaurantId, count){
+  const rand = mulberry32(hashSeed(restaurantId));
+  const out = [];
+  const statuses = ['completed','completed','completed','confirmed','confirmed','new','new','cancelled'];
+  // немного повторяющихся телефонов — чтобы было из чего считать "повторных гостей"
+  const pool = Array.from({length: Math.ceil(count*0.65)}, () => ({
+    name: FIRST_NAMES[Math.floor(rand()*FIRST_NAMES.length)] + ' ' + LAST_NAMES[Math.floor(rand()*LAST_NAMES.length)],
+    phone: randPhone(rand)
+  }));
+  for (let i=0;i<count;i++){
+    const guest = pool[Math.floor(rand()*pool.length)];
+    const daysAgo = Math.floor(rand()*30);
+    const d = new Date(); d.setDate(d.getDate() - daysAgo);
+    const status = statuses[Math.floor(rand()*statuses.length)];
+    out.push({
+      id: restaurantId + '_seed_' + i,
+      name: guest.name,
+      phone: guest.phone,
+      guests: 1 + Math.floor(rand()*7),
+      date: d.toISOString().split('T')[0],
+      time: String(9+Math.floor(rand()*13)).padStart(2,'0')+':00',
+      comment: '',
+      status,
+      createdAt: d.getTime(),
+      source: rand() > 0.6 ? 'bot' : 'web'
+    });
+  }
+  return out.sort((a,b) => b.createdAt - a.createdAt);
+}
+const BOOKINGS = {};
+RESTAURANTS.forEach(r => { BOOKINGS[r.id] = generateBookings(r.id, 12); });
+
+function loyaltyFor(restaurantId){
+  const list = BOOKINGS[restaurantId] || [];
+  const byPhone = {};
+  list.forEach(b => {
+    if (!byPhone[b.phone]) byPhone[b.phone] = { name:b.name, phone:b.phone, visits:0 };
+    byPhone[b.phone].visits++;
+  });
+  return Object.values(byPhone)
+    .map(g => {
+      const tier = g.visits >= 6 ? 'Золото' : g.visits >= 3 ? 'Серебро' : 'Бронза';
+      const nextAt = g.visits >= 6 ? 6 : g.visits >= 3 ? 6 : 3;
+      const pct = Math.min(100, Math.round((g.visits / nextAt) * 100));
+      return { ...g, tier, pct, points: g.visits * 1000 };
+    })
+    .sort((a,b) => b.visits - a.visits)
+    .slice(0, 6);
+}
+</script>
+<script>
+/* ============================================================================
+   КАБИНЕТ ВЛАДЕЛЬЦА
+   Демо-вход без реальной аутентификации. На реальном бэкенде — Supabase Auth
+   + Row Level Security: политика на таблице bookings проверяет, что
+   auth.uid() владельца совпадает с owner_id чайханы в каждой строке. Это
+   значит, что даже если два владельца одновременно шлют запросы к одному и
+   тому же API-эндпоинту, каждый физически не может получить чужие брони —
+   проверка идёт в базе данных, а не в коде приложения (которое можно
+   подделать). Здесь для демо просто выбираем restaurantId из select'а.
+   ============================================================================ */
+let OWNER_RID = null;
+
+function renderOwnerLogin(){
+  const root = document.getElementById('ownerRoot');
+  root.innerHTML = `
+  <div class="owner-wrap">
+    <div class="container">
+      <div class="owner-login reveal">
+        <span class="ic">${ic('shield')}</span>
+        <h2>Кабинет владельца</h2>
+        <p>Демо-вход: выберите чайхану, любой пароль подойдёт.</p>
+        <form id="ownerLoginForm">
+          <input type="hidden" name="csrf" value="${CSRF_TOKEN}">
+          <div class="field">
+            <label for="ol-rest">Ваша чайхана</label>
+            <select id="ol-rest">${RESTAURANTS.map(r => `<option value="${e(r.id)}">${e(r.name)}</option>`).join('')}</select>
+          </div>
+          <div class="field">
+            <label for="ol-pass">Пароль</label>
+            <input id="ol-pass" type="password" placeholder="••••••••" autocomplete="off">
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg">Войти в кабинет</button>
+        </form>
+        <p class="demo-note">Демо-режим: пароль не проверяется, авторизация имитируется. На реальном бэкенде — Supabase Auth с email/паролем владельца и Row Level Security на уровне базы данных.</p>
+      </div>
+    </div>
+  </div>`;
+  attachReveals(root);
+  document.getElementById('ownerLoginForm').addEventListener('submit', ev => {
+    ev.preventDefault();
+    OWNER_RID = document.getElementById('ol-rest').value;
+    renderOwnerDashboard();
+  });
+}
+
+function ownerLogout(){ OWNER_RID = null; renderOwnerLogin(); }
+
+function renderOwnerDashboard(){
+  const r = byId(OWNER_RID);
+  const root = document.getElementById('ownerRoot');
+  const bookings = BOOKINGS[OWNER_RID] || [];
+  const now = Date.now(), THIRTY_D = 30*24*60*60*1000;
+  const recent = bookings.filter(b => now - b.createdAt < THIRTY_D);
+  const newCount = recent.filter(b => b.status==='new').length;
+  const uniquePhones = new Set(recent.map(b => b.phone));
+  const repeatPhones = [...uniquePhones].filter(p => recent.filter(b=>b.phone===p).length > 1);
+  const repeatPct = uniquePhones.size ? Math.round((repeatPhones.length/uniquePhones.size)*100) : 0;
+  const loyalty = loyaltyFor(OWNER_RID);
+
+  root.innerHTML = `
+  <div class="dash-wrap">
+    <div class="container">
+      <div class="dash-top">
+        <div>
+          <h2>${e(r.name)}</h2>
+          <p>Кабинет владельца · ${e(r.district)} район</p>
+        </div>
+        <button class="btn btn-ghost" onclick="ownerLogout()">Выйти</button>
+      </div>
+
+      <div class="rls-note">${ic('shield')}<span>Демо-данные этой чайханы. На реальном бэкенде доступ к этим строкам ограничен политикой Row Level Security в Supabase — владелец физически не может запросить брони другого заведения, даже подделав запрос.</span></div>
+
+      <div class="stat-row">
+        <div class="stat-card"><b data-cnt="${recent.length}">0</b><span>броней за 30 дней</span></div>
+        <div class="stat-card"><b data-cnt="${newCount}">0</b><span>новых, ждут подтверждения</span></div>
+        <div class="stat-card"><b data-cnt="${repeatPct}" data-sfx="%">0</b><span>повторные гости</span></div>
+        <div class="stat-card"><b data-cnt="${Math.round(r.avgCheck/1000)}" data-sfx="K">0</b><span>средний чек, сум</span></div>
+      </div>
+
+      <div class="dash-panel">
+        <div class="dash-panel-h"><h3>Брони</h3><span style="font-size:12.5px;color:rgba(43,29,22,.5)">${bookings.length} всего</span></div>
+        <div class="brow head"><span>Гость</span><span>Телефон</span><span>Гостей</span><span>Дата / время</span><span></span></div>
+        <div id="bookRows"></div>
+      </div>
+
+      <div class="dash-panel">
+        <div class="dash-panel-h"><h3>Карты лояльности</h3><span style="font-size:12.5px;color:rgba(43,29,22,.5)">по количеству визитов</span></div>
+        <div class="loyalty-grid">
+          ${loyalty.map(g => `
+            <div class="loyalty-card tier-${g.tier}">
+              <div class="loyalty-top"><b>${e(g.name)}</b><span class="tier-tag">${e(g.tier)}</span></div>
+              <p>${g.visits} визит(ов) · ${fmt(g.points)} баллов</p>
+              <div class="loyalty-bar"><i style="width:${g.pct}%"></i></div>
+            </div>`).join('') || '<p style="font-size:13.5px;color:rgba(43,29,22,.5)">Пока нет данных по гостям.</p>'}
+        </div>
+      </div>
+    </div>
+  </div>`;
+  renderBookRows();
+  attachReveals(root);
+}
+
+function renderBookRows(){
+  const wrap = document.getElementById('bookRows');
+  if (!wrap) return;
+  const bookings = BOOKINGS[OWNER_RID] || [];
+  wrap.innerHTML = bookings.map(b => `
+    <div class="brow" data-bid="${e(b.id)}">
+      <span class="bname">${e(b.name)}</span>
+      <span class="bphone">
+        <span class="phone-val" data-full="${e(b.phone)}">${e(maskPhone(b.phone))}</span>
+        <button class="reveal-phone" onclick="revealPhone(this)">показать</button>
+      </span>
+      <span>${b.guests} чел.</span>
+      <span>${e(b.date)} · ${e(b.time)}</span>
+      <span class="brow-actions">
+        <span class="status-pill status-${b.status}">${statusLabel(b.status)}</span>
+        ${b.status==='new' ? `
+          <button class="icon-btn ok" title="Подтвердить" onclick="setBookingStatus('${e(b.id)}','confirmed')">${ic('check')}</button>
+          <button class="icon-btn no" title="Отменить" onclick="setBookingStatus('${e(b.id)}','cancelled')">${ic('x')}</button>` : ''}
+      </span>
+    </div>`).join('') || '<p style="padding:14px 10px;font-size:13.5px;color:rgba(43,29,22,.5)">Броней пока нет.</p>';
+}
+function statusLabel(s){
+  return { new:'Новая', confirmed:'Подтверждена', completed:'Завершена', cancelled:'Отменена' }[s] || s;
+}
+function setBookingStatus(id, status){
+  const list = BOOKINGS[OWNER_RID] || [];
+  const b = list.find(x => x.id === id);
+  if (b) b.status = status;
+  renderBookRows();
+  // в реальном продукте: UPDATE bookings SET status=... WHERE id=... (RLS проверит owner_id)
+}
+function revealPhone(btn){
+  const span = btn.previousElementSibling;
+  span.textContent = span.dataset.full; // полный номер показываем только по явному действию владельца
+  btn.remove();
+}
+</script>
+<script>
+/* ============================================================================
+   РОУТЕР (по хешу адреса) + переключатель "Для гостей / Для владельцев"
+   ============================================================================ */
+const viewCatalog = document.getElementById('view-catalog');
+const viewDetail  = document.getElementById('view-detail');
+const viewOwner   = document.getElementById('view-owner');
+
+function setActiveNav(name){
+  document.querySelectorAll('#navLinks a[data-nav]').forEach(a => a.classList.toggle('active', a.dataset.nav===name));
+}
+function setModeButtons(mode){
+  const g = mode==='owner' ? false : true;
+  ['modeGuestBtn','modeGuestBtnM'].forEach(id => document.getElementById(id)?.classList.toggle('on', g));
+  ['modeOwnerBtn','modeOwnerBtnM'].forEach(id => document.getElementById(id)?.classList.toggle('on', !g));
+}
+
+function route(){
+  const hash = location.hash || '#/catalog';
+  const detailMatch = hash.match(/^#\/restaurant\/([a-z0-9-]+)/);
+
+  viewCatalog.hidden = true; viewDetail.hidden = true; viewOwner.hidden = true;
+
+  if (hash.startsWith('#/owner')){
+    viewOwner.hidden = false;
+    setModeButtons('owner');
+    setActiveNav('');
+    if (OWNER_RID) renderOwnerDashboard(); else renderOwnerLogin();
+    return;
+  }
+  if (detailMatch){
+    viewDetail.hidden = false;
+    setModeButtons('guest');
+    setActiveNav('');
+    renderDetail(detailMatch[1]);
+    return;
+  }
+  // каталог по умолчанию
+  viewCatalog.hidden = false;
+  setModeButtons('guest');
+  setActiveNav('catalog');
+}
+window.addEventListener('hashchange', route);
+
+/* ---------- шапка: glass-эффект при скролле ---------- */
+const hdr = document.getElementById('hdr');
+addEventListener('scroll', () => hdr.classList.toggle('scrolled', scrollY > 30 || !viewCatalog.hidden===false), { passive:true });
+// на страницах, отличных от главного hero (детальная/owner), шапка сразу непрозрачная
+function syncHeaderStyle(){
+  const forceOpaque = viewCatalog.hidden; // на detail/owner нет тёмного hero под шапкой на всю высоту
+  hdr.classList.toggle('scrolled', forceOpaque || scrollY > 30);
+}
+window.addEventListener('hashchange', () => setTimeout(syncHeaderStyle, 0));
+addEventListener('scroll', syncHeaderStyle, { passive:true });
+
+/* ---------- мобильное меню ---------- */
+function mm(open){
+  document.getElementById('mmenu').classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+
+/* ---------- инициализация ---------- */
+initFilters();
+renderCatalog();
+attachReveals(document.getElementById('view-catalog'));
+route();
+syncHeaderStyle();
+</script>
+</body>
+</html>
