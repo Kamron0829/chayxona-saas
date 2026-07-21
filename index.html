@@ -335,6 +335,37 @@ h1,h2,h3,.display{font-family:'Cormorant Garamond',serif}
 .rl-banner.show{display:flex}
 .rl-banner svg{width:18px;height:18px;flex-shrink:0}
 
+/* ---------- мокап Telegram-бота ---------- */
+.tg-caption{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:rgba(43,29,22,.55);margin:22px 0 12px}
+.tg-caption svg{width:16px;height:16px;stroke:#29A9EA;flex-shrink:0}
+.tg-card{max-width:400px;margin:0 auto;border-radius:18px;overflow:hidden;box-shadow:0 14px 40px -14px rgba(43,29,22,.3);animation:fadeUp .4s var(--luxe)}
+.tg-header{display:flex;align-items:center;gap:10px;background:#29A9EA;padding:12px 16px;color:#fff}
+.tg-avatar{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tg-avatar svg{width:19px;height:19px;stroke:#fff}
+.tg-header-txt b{display:block;font-size:14.5px;font-weight:700}
+.tg-header-txt span{font-size:11.5px;color:rgba(255,255,255,.8)}
+.tg-body{background:#DCEBFA;background-image:linear-gradient(rgba(255,255,255,.35) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.35) 1px,transparent 1px);background-size:22px 22px;padding:16px}
+.tg-bubble{background:#fff;border-radius:14px 14px 14px 4px;padding:12px 13px 8px;font-size:13px;line-height:1.55;color:#1c1c1c;box-shadow:0 1px 2px rgba(0,0,0,.08);max-width:100%}
+.tg-bubble b{display:block;margin-bottom:4px;font-size:13.5px}
+.tg-row{display:flex;gap:6px;margin-top:2px}
+.tg-row span:first-child{flex-shrink:0}
+.tg-meta{display:flex;justify-content:flex-end;align-items:center;gap:3px;margin-top:4px;font-size:11px;color:rgba(0,0,0,.4)}
+.tg-meta svg{width:14px;height:14px;stroke:#29A9EA}
+.tg-actions{display:flex;gap:1px;margin:10px -13px -8px;border-top:1px solid rgba(0,0,0,.08)}
+.tg-actions button{flex:1;padding:11px 6px;font-size:12.5px;font-weight:700;color:#29A9EA;border-top:1px solid transparent;transition:background .2s}
+.tg-actions button:first-child{border-right:1px solid rgba(0,0,0,.08)}
+.tg-actions button:hover{background:rgba(41,169,234,.08)}
+.tg-actions button.decline{color:var(--burgundy)}
+.tg-status{display:flex;align-items:center;gap:5px;margin-top:10px;padding-top:8px;border-top:1px solid rgba(0,0,0,.08);font-size:12.5px;font-weight:700}
+.tg-status svg{width:14px;height:14px;flex-shrink:0}
+.tg-status.confirmed{color:#1a9b52}
+.tg-status.declined{color:var(--burgundy)}
+.tg-feed{display:flex;flex-direction:column;gap:12px}
+.tg-feed .tg-card{max-width:none;margin:0;box-shadow:none;border:1px solid var(--sand)}
+.tg-feed .tg-body{padding:12px}
+.tg-connected{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:#1a9b52;background:rgba(26,155,82,.1);border-radius:999px;padding:5px 12px}
+.tg-connected i{width:7px;height:7px;border-radius:50%;background:#1a9b52;flex-shrink:0}
+
 /* ---------- схема зала ---------- */
 .fp-toggle{display:inline-flex;padding:4px;border-radius:999px;background:rgba(43,29,22,.06);border:1px solid var(--sand);margin-bottom:30px}
 .fp-toggle button{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:999px;font-size:13px;font-weight:700;color:rgba(43,29,22,.6);transition:all .3s var(--luxe)}
@@ -436,7 +467,8 @@ h1,h2,h3,.display{font-family:'Cormorant Garamond',serif}
 .stat-card span{display:block;margin-top:6px;font-size:12.5px;color:rgba(43,29,22,.55)}
 .dash-panel{background:var(--ivory);border-radius:22px;padding:26px;box-shadow:0 4px 24px -8px rgba(43,29,22,.1);margin-bottom:26px}
 .dash-panel-h{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
-.dash-panel-h h3{font-size:20px;font-weight:600}
+.dash-panel-h h3{display:flex;align-items:center;gap:8px;font-size:20px;font-weight:600}
+.dash-panel-h h3 svg{width:19px;height:19px;stroke:var(--terracotta);flex-shrink:0}
 .rls-note{display:flex;gap:8px;align-items:flex-start;font-size:12px;color:rgba(43,29,22,.5);background:rgba(197,158,66,.1);border-radius:12px;padding:10px 14px;margin-bottom:18px}
 .rls-note svg{width:14px;height:14px;flex-shrink:0;margin-top:2px;stroke:var(--bronze)}
 
@@ -846,7 +878,9 @@ const ICONS = {
   table:'<rect x="3" y="9" width="18" height="3" rx="1"/><path d="M6 12v7M18 12v7"/>',
   sofa:'<path d="M4 18v-4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4M3 18h18M6 12V9a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3M4 18v1.5M20 18v1.5"/>',
   tv:'<rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/>',
-  mic:'<path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M8 21h8"/>'
+  mic:'<path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M8 21h8"/>',
+  send:'<path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/>',
+  checks:'<path d="M2.5 12.5l4 4 8-9"/><path d="M8 13.5l3.5 3.5L20 8"/>'
 };
 function ic(name, cls){ return `<svg class="${cls||''}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ICONS[name]||ICONS.star}</svg>`; }
 </script>
@@ -1441,6 +1475,7 @@ function renderDetail(id){
           <span class="succ-ic">${ic('check')}</span>
           <h3>Бронь принята!</h3>
           <p>Владелец «${e(r.name)}» подтвердит бронь в течение 15 минут. До встречи!</p>
+          <div id="tgDemoWrap" style="width:100%"></div>
           <button onclick="resetBookForm()">Создать ещё одну бронь</button>
         </div>
       </div>
@@ -1657,6 +1692,54 @@ function applyFieldErrors(form, errors){
   });
 }
 
+/* ---------- мокап Telegram-бота: как владелец видит бронь в реальном времени ---------- */
+function tgBubbleContent(r, b){
+  const lines = [
+    `🔔 <b>Новая бронь — ${e(r.name)}</b>`,
+    `👤 ${e(b.name)}`,
+    `📞 ${e(b.phone)}`,
+    `👥 ${b.guests} чел.`,
+    `📅 ${e(b.date)} · ${e(b.time)}`
+  ];
+  if (b.comment) lines.push(`💬 ${e(b.comment)}`);
+  return lines.join('<br>');
+}
+function tgCardHtml(rid, r, b, opts){
+  opts = opts || {};
+  const statusHtml = b.status === 'confirmed'
+    ? `<div class="tg-status confirmed">${ic('check')} Бронь подтверждена</div>`
+    : b.status === 'cancelled'
+      ? `<div class="tg-status declined">${ic('x')} Бронь отклонена</div>`
+      : opts.interactive
+        ? `<div class="tg-actions"><button type="button" onclick="tgRespond('${e(rid)}','${e(b.id)}','confirmed')">✅ Подтвердить</button><button type="button" class="decline" onclick="tgRespond('${e(rid)}','${e(b.id)}','cancelled')">❌ Отклонить</button></div>`
+        : '';
+  return `
+  <div class="tg-card" data-tgcard="${e(b.id)}">
+    <div class="tg-header">
+      <span class="tg-avatar">${ic('send')}</span>
+      <div class="tg-header-txt"><b>Chayxona.uz бот</b><span>заявки на бронь · онлайн</span></div>
+    </div>
+    <div class="tg-body">
+      <div class="tg-bubble">
+        ${tgBubbleContent(r, b)}
+        <div class="tg-meta">только что ${ic('checks')}</div>
+        ${statusHtml}
+      </div>
+    </div>
+  </div>`;
+}
+function tgRespond(rid, bid, status){
+  const list = BOOKINGS[rid];
+  const b = list && list.find(x => x.id === bid);
+  if (!b) return;
+  b.status = status;
+  const r = byId(rid);
+  document.querySelectorAll(`[data-tgcard="${bid}"]`).forEach(card => {
+    card.outerHTML = tgCardHtml(rid, r, b, { interactive:false });
+  });
+  if (OWNER_RID === rid) renderOwnerDashboard();
+}
+
 async function onBookSubmit(ev){
   ev.preventDefault();
   const form = ev.target;
@@ -1721,9 +1804,15 @@ async function onBookSubmit(ev){
 
   form.style.display = 'none';
   document.getElementById('bookSuccess').classList.add('show');
+  const tgWrap = document.getElementById('tgDemoWrap');
+  if (tgWrap){
+    tgWrap.innerHTML = `<p class="tg-caption">${ic('send')} Так эта заявка прямо сейчас пришла владельцу в Telegram</p>` + tgCardHtml(restaurantId, byId(restaurantId), booking, { interactive:true });
+  }
 }
 function resetBookForm(){
   document.getElementById('bookSuccess').classList.remove('show');
+  const tgWrap = document.getElementById('tgDemoWrap');
+  if (tgWrap) tgWrap.innerHTML = '';
   const form = document.getElementById('bookForm');
   form.style.display = '';
   form.reset();
@@ -1890,6 +1979,13 @@ function renderOwnerDashboard(){
       </div>
 
       <div class="dash-panel">
+        <div class="dash-panel-h"><h3>${ic('send')} Telegram-бот</h3><span class="tg-connected"><i></i>Подключён · @chayxona_bot</span></div>
+        <div class="tg-feed">
+          ${bookings.slice(0,3).map(b => tgCardHtml(OWNER_RID, r, b, { interactive:false })).join('') || '<p style="font-size:13.5px;color:rgba(43,29,22,.5)">Пока нет броней — уведомления будут появляться здесь автоматически, как только гость забронирует стол.</p>'}
+        </div>
+      </div>
+
+      <div class="dash-panel">
         <div class="dash-panel-h"><h3>Брони</h3><span style="font-size:12.5px;color:rgba(43,29,22,.5)">${bookings.length} всего</span></div>
         <div class="brow head"><span>Гость</span><span>Телефон</span><span>Гостей</span><span>Дата / время</span><span></span></div>
         <div id="bookRows"></div>
@@ -1940,7 +2036,7 @@ function setBookingStatus(id, status){
   const list = BOOKINGS[OWNER_RID] || [];
   const b = list.find(x => x.id === id);
   if (b) b.status = status;
-  renderBookRows();
+  renderOwnerDashboard(); // держит в синхроне и таблицу броней, и ленту Telegram-бота
   // в реальном продукте: UPDATE bookings SET status=... WHERE id=... (RLS проверит owner_id)
 }
 function revealPhone(btn){
